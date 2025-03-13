@@ -1,0 +1,88 @@
+[push]
+    default = matching
+[alias]
+    # aliasコマンドを表示
+    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+    ad = add
+    adA = add -A
+    st = status
+    df = diff
+    df1 = diff HEAD
+    df2 = diff HEAD~
+    df3 = diff HEAD~~
+    # 単語単位のdiff
+    dw = diff --color-words
+    ds = diff --staged
+    co = checkout
+    # checkout branchの略
+    cb = !sh -c 'git checkout $(git branch | peco)'
+    ci = commit -v
+    mg = !sh -c 'git merge $(git branch | peco)'
+    # @see http://qiita.com/mabots/items/76d48aa33720287253bf
+    ps = push origin HEAD
+    # git pull origin current_branch_name
+    pl = !sh -c '   \
+        CURRENT_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD` && \
+        git pull origin $CURRENT_BRANCH_NAME'
+
+    # Usage:
+    #   git make-feature-pr issue番号
+    #   新しくfeatureブランチを作成しPRを作る
+    make-feature-pr = !sh -c '\
+        test "${0}" != "sh" && \
+        git checkout -b "feature/${0}" && \
+        git commit --allow-empty -m \"make pull request\" && \
+        git push origin HEAD'
+
+    # Usage:
+    #   git make-hotfix-pr hotfixブランチ名
+    #   新しくhotfixブランチを作成しPRを作る
+    make-hotfix-pr = !sh -c '\
+        test "${0}" != "sh" && \
+        git checkout -b "hotfix/${0}" && \
+        git commit --allow-empty -m \"make pull request\" && \
+        git push origin HEAD'
+
+    make-gitignore = !sh -c 'gibo ${0} > .gitignore'
+    br = branch
+    delete-branch = !sh -c 'git branch -D $(git branch | peco)'
+    # マージ済みのブランチを削除
+    delete-merged-branch = !git branch --merged | grep -v master | grep -v '*' | xargs -I % git branch -d %
+    # 引数が指定されていなければブランチ名をリネームしない
+    rename-branch = !sh -c '   \
+        test "${0}" != "sh" && \
+        CURRENT_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD` && \
+        NEW_BRANCH_NAME=${0} && \
+        git branch -m $CURRENT_BRANCH_NAME $NEW_BRANCH_NAME'
+    graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+    log-detail = log --stat --decorate=short --pretty=format:'%C(yellow)%h %Cgreen%cr %Cblue%cn%Cred%d %Creset%s %C(cyan)%b'
+    log-merge = log --merges --pretty=format:'%C(yellow)%h %Cgreen%ci %Cblue%cn%Cred%d %Creset%s %C(cyan)%b'
+    # logから検索をかけたい文字列を引数に渡すこと
+    # git log-word-search hoge
+    log-word-search = log --stat -S
+    df-word = diff --word-diff
+    browse = !hub browse
+    recommit = commit --amend
+    # 一つ前のコミットを削除
+    one-previous-commit-hard-reset = reset --hard HEAD^
+    # コミットを削除(ワークスペースに残らない)
+    hard-reset = reset --hard
+     # コミット番号からPRを特定する
+     # git show-pr ea3280d2
+    show-pr = !"f() { git log --merges --oneline --reverse --ancestry-path $1...master | grep 'Merge pull request #' | head -n 1; }; f"
+[core]
+    # 全gitプロジェクトに反映させる.gitconfig
+    excludesfile = ~/.gitignore
+    # falseで日本語ファイルを文字化けせずに表示
+    autocrlf = false
+    editor = vim -c \"set fenc=utf-8\"
+[color]
+    ui = true
+[ghq]
+    root = ~/src
+[include]
+    path = ~/.gitconfig.local
+[commit]
+    template = ~/.gitcommit.template
+[merge]
+    tool = vimdiff

@@ -1,0 +1,9 @@
+set backspace=indent,eol,start
+
+" keymap {{{1
+"====================
+" insertモード
+inoremap jj <esc>
+
+noremap ; :
+noremap : ;
