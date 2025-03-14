@@ -1,5 +1,5 @@
 # dotfilesディレクトリがなければ作成
-[[ -d ${HOME}/dotfiles ]] || git clone git@github.com:hamuhamu/dotfiles.git ${HOME}/dotfiles
+[[ -d ${HOME}/dotfiles ]] || git clone git@github.com:yuki-ohashi2020/dotfiles.git ${HOME}/dotfiles
 
 
 # ドットファイルをホームディレクトリにシムリンクを貼る
@@ -10,6 +10,8 @@ do
 
     ln -sf ${HOME}/dotfiles/$i ${HOME}
 done
+
+ln -sf ${HOME}/dotfiles/.hammerspoon ${HOME}
 
 #######################################################################
 # binの設定

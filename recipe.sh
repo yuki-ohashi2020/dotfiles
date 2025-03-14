@@ -1,22 +1,10 @@
-brew install --cask dropbox
 brew install --cask iterm2
-brew install --cask mysqlworkbench
-brew install --cask slack
 brew install --cask caffeine
 brew install --cask alfred
-brew install --cask evernote
-brew install --cask dash
-brew install --cask hyperswitch
 brew install --cask bettertouchtool
-brew install --cask shiftit
-brew install --cask vagrant
-brew install --cask virtualbox
-brew install --cask virtualbox-extension-pack
 brew install --cask lastpass
 brew install --cask google-japanese-ime
 brew install --cask google-chrome
-brew install --cask phpstorm
-brew install --cask postman
 # Docker for Mac
 brew install --cask docker
 brew install jq
@@ -55,14 +43,6 @@ ghq get https://github.com/altercation/solarized.git
 
 # .DS_Storeを作らない
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-
-# composerをインストール
-curl -sS https://getcomposer.org/installer | php -- --install-dir=~/bin
-mv ~/bin/{composer.phar,composer}
-
-# phpunitインストール
-curl -sSL https://phar.phpunit.de/phpunit.phar > ~/bin/phpunit
-chmod 775 ~/bin/phpunit
 
 brew install npm
 # TextLint
