@@ -13,7 +13,6 @@ Composition	Ctrl n	Commit
 Composition	Ctrl o	ConvertToHalfWidth
 Composition	Ctrl p	ConvertToFullAlphanumeric
 Composition	Ctrl Right	MoveCursorToEnd
-Composition	Ctrl Space	Convert
 Composition	Ctrl u	ConvertToHiragana
 Composition	Delete	Delete
 Composition	Down	Commit
@@ -56,7 +55,6 @@ Conversion	Ctrl p	ConvertToFullAlphanumeric
 Conversion	Ctrl Right	SegmentFocusLast
 Conversion	Ctrl Shift Left	SegmentWidthShrink
 Conversion	Ctrl Shift Right	SegmentWidthExpand
-Conversion	Ctrl Space	ConvertNext
 Conversion	Ctrl u	ConvertToHiragana
 Conversion	Down	CommitOnlyFirstSegment
 Conversion	Eisu	ToggleAlphanumericMode
