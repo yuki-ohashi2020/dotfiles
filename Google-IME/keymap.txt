@@ -12,7 +12,6 @@ Conversion	Up	ConvertPrev
 Conversion	Space	ConvertNext
 Conversion	Tab	PredictAndConvert
 Conversion	Left	ConvertPrevPage
-Composition	Backspace	Backspace
 Composition	Ctrl Space	ConvertToHalfAlphanumeric
 Composition	Ctrl g	Delete
 Composition	Ctrl h	Backspace
@@ -43,25 +42,13 @@ Composition	Shift Muhenkan	ToggleAlphanumericMode
 Composition	Shift Space	Convert
 Composition	Space	Convert
 Composition	Tab	PredictAndConvert
-Composition	VirtualLeft	MoveCursorLeft
-Composition	VirtualRight	MoveCursorRight
-Composition	VirtualEnter	Commit
 Precomposition	Ctrl Backspace	Undo
-Precomposition	Ctrl F12	LaunchConfigDialog
-Precomposition	Ctrl F7	LaunchWordRegisterDialog
-Precomposition	F10	ToggleAlphanumericMode
-Precomposition	Kana	ToggleAlphanumericMode
+Precomposition	Ctrl d	LaunchWordRegisterDialog
 Precomposition	Space	InsertSpace
-DirectInput	Shift Henkan	Reconvert
-Suggestion	Ctrl Down	PredictAndConvert
-Suggestion	Ctrl Enter	CommitFirstSuggestion
-Suggestion	Down	PredictAndConvert
+Suggestion	Ctrl j	PredictAndConvert
 Suggestion	Shift Enter	CommitFirstSuggestion
-Prediction	Ctrl Down	ConvertNext
-Prediction	Ctrl Up	ConvertPrev
-Prediction	Down	ConvertNext
-Prediction	Up	ConvertPrev
-Prediction	Ctrl Delete	DeleteSelectedCandidate
+Prediction	Ctrl j	ConvertNext
+Prediction	Ctrl k	ConvertPrev
 Composition	Kanji	CancelAndIMEOff
 Composition	OFF	CancelAndIMEOff
 Composition	ON	IMEOn

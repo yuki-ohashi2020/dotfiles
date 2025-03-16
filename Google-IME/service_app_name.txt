@@ -1,0 +1,3 @@
+n	Notion	名詞	
+v	Vivaldi	名詞	
+c	ChatGPT	名詞	
