@@ -9,4 +9,5 @@ package.path = package.path .. ";" .. home .. "/.hammerspoon/modules/?.lua"
 
 -- 各モジュールを読み込む
 -- require("vim_mode")
--- その他のモジュールを追加
+-- require("caret_overlay")
+
