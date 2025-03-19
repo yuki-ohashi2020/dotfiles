@@ -1,3 +1,5 @@
-n	Notion	名詞	
-v	Vivaldi	名詞	
-c	ChatGPT	名詞	
+の	Notion	固有名詞	
+ゔぃ	Vivaldi	固有名詞	
+ちゃ	ChatGPT	固有名詞	
+お	Obsidian	固有名詞	
+cぁ	Claude	固有名詞	
