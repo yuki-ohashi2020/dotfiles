@@ -1,21 +1,13 @@
 
-hs.timer.doEvery(10, function()
-        -- hs.alert.show("test")
-    -- システムの標準的な場所から git を探す
-    local git = hs.execute("export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin; which git"):gsub("\n", "")
+local gitTimer = hs.timer.doEvery(1, function()
     local repo = os.getenv("HOME") .. "/dotfiles"
-
-    if git == "" then
-        hs.alert.show("Git Error: git command not found.")
-        return
-    end
-
-    -- 実行（認証エラーを防ぐため PATH を引き継ぐ）
-    local cmd = string.format("export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin; cd %s && %s add . && %s commit -m 'auto' && %s push", repo, git, git, git)
+    -- 末尾に "2>&1" を追加して、エラー出力を標準出力に統合する
+    local cmd = "export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin; cd " .. repo .. " && git add . && git commit -m 'auto' && git push 2>&1"
 
     local output, status = hs.execute(cmd)
 
     if not status then
-        hs.alert.show("Git Push Error:", output)
+        -- これで空だった output にエラーメッセージが入ります
+        hs.alert.show("Git Error: " .. (output or "unknown"), 5)
     end
 end):start()
