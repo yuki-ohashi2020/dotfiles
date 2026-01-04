@@ -22,7 +22,7 @@ function showEdgeBar()
     if screenEdgeCanvas then
         screenEdgeCanvas:delete()
     end
-    
+
     -- 新しいキャンバスを作成（絶対座標系を使用）
     screenEdgeCanvas = hs.canvas.new({
         x = barConfig.xPosition,
@@ -30,7 +30,7 @@ function showEdgeBar()
         w = barConfig.width,
         h = barConfig.height
     })
-    
+
     -- キャンバスの設定
     screenEdgeCanvas:appendElements({
         type = "rectangle",
@@ -38,12 +38,12 @@ function showEdgeBar()
         fillColor = {red=0, green=1, blue=0, alpha=1},
         roundedRectRadii = {xRadius = 0, yRadius = 0}
     })
-    
+
     -- 常に他のウィンドウの上に表示し、最前面に保持
     screenEdgeCanvas:level(hs.canvas.windowLevels.overlay)
-    screenEdgeCanvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces + 
+    screenEdgeCanvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces +
                              hs.canvas.windowBehaviors.stationary)
-    
+
     -- キャンバスを表示
     screenEdgeCanvas:show()
 end
