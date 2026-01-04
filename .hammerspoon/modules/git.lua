@@ -1,5 +1,5 @@
 
-local gitTimer = hs.timer.doEvery(1, function()
+local gitTimer = hs.timer.doEvery(10, function()
     local repo = os.getenv("HOME") .. "/dotfiles"
     -- 1. PATHを通す
     -- 2. ディレクトリ移動
