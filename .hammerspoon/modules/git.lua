@@ -1,6 +1,6 @@
 
 hs.timer.doEvery(30, function()
-        hs.alert.show("test")
+        -- hs.alert.show("test")
     -- システムの標準的な場所から git を探す
     local git = hs.execute("export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin; which git"):gsub("\n", "")
     local repo = os.getenv("HOME") .. "/dotfiles"
