@@ -1,3 +1,4 @@
+--[[
 local reloadTimer = nil
 
 function reloadConfig(files)
@@ -25,13 +26,17 @@ hs.pathwatcher
   .new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
   :start()
 
+  -- リロードは手動で行う
+  ]]
 
 -- ==========================================
 -- Pluginの読み込み
 -- ==========================================
 require("modules.config")
-require("modules.git")
 require("modules.app_toggle")
+
+-- 動作エラーがなければコードをコミットする
+require("modules.git")
 
 -- Configが正常に読み込まれたらアラートを表示する
 hs.alert.show("Config Loaded 🚀")
