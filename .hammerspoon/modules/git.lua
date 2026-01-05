@@ -1,5 +1,5 @@
 -- 3分に一度、git commitとpushをする
-local gitTimer = hs.timer.doEvery(3, function()
+local gitTimer = hs.timer.doEvery(10, function()
     local repo = os.getenv("HOME") .. "/dotfiles"
     local timestamp = os.date("%Y/%m/%d %H:%M:%S")
     local commitMsg = string.format("auto commit: %s", timestamp)
