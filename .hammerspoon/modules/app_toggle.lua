@@ -12,7 +12,7 @@ local function toggleApp(appName, frame)
     end
   end
 
-  -- 起動していなければ起動
+  -- 起動していなければ起動 
   if not app then
     hs.application.launchOrFocus(appName)
     hs.timer.doAfter(0.5, function()
