@@ -20,5 +20,5 @@ end
 -- 1. 初回起動時に実行（差分があれば即コミット）
 autoGitSync()
 
--- 2. 以降、3分間隔で実行
+-- 2. 以降、インターバル間隔で実行
 local gitTimer = hs.timer.doEvery(GIT_NTERVAL, autoGitSync):start()
