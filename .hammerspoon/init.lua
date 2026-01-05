@@ -35,6 +35,13 @@ hs.pathwatcher
 require("modules.config")
 require("modules.app_toggle")
 
+local menu = hs.menubar.new()
+hs.timer.doEvery(3, function() -- 3秒に1回で十分
+    local cpu = hs.host.cpuUsage()
+    -- 計算処理...
+    menu:setTitle(string.format("CPU: %.1f%%", totalUsage))
+end)
+
 -- 動作エラーがなければコードをコミットする
 require("modules.git")
 
