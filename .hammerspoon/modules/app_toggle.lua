@@ -1,49 +1,48 @@
 local function toggleApp(app)
-  local application =
-    app.bundleID and hs.application.get(app.bundleID)
-    or hs.application.find(app.name)
-
-  local function applyFrame(win)
-    if not win then return end
-    if app.frame then
-      win:setFrame(app.frame)
-    else
-      win:setFrame(win:screen():frame())
-    end
+  local function findApp()
+    return app.bundleID
+      and hs.application.get(app.bundleID)
+      or hs.application.find(app.name)
   end
 
-  if not application then
+  local function launchApp()
     if app.bundleID then
       hs.application.launchOrFocusByBundleID(app.bundleID)
     else
       hs.application.launchOrFocus(app.name)
     end
+  end
+
+  local function applyFrame(win)
+    if not win then return end
+    win:setFrame(app.frame or win:screen():frame())
+  end
+
+  local application = findApp()
+
+  -- 起動していない → 起動して表示
+  if not application then
+    launchApp()
 
     hs.timer.doAfter(0.6, function()
-      local a =
-        app.bundleID and hs.application.get(app.bundleID)
-        or hs.application.find(app.name)
-
+      local a = findApp()
       if not a then return end
-      a:activate(true)
 
-      hs.timer.doAfter(0.2, function()
-        applyFrame(a:focusedWindow() or a:mainWindow())
-      end)
+      a:activate(true)
+      applyFrame(a:focusedWindow() or a:mainWindow())
     end)
     return
   end
 
+  -- 表示中 → 非表示
   if application:isFrontmost() then
     application:hide()
     return
   end
 
+  -- 非表示 → 表示
   application:activate(true)
-
-  hs.timer.doAfter(0.1, function()
-    applyFrame(application:focusedWindow() or application:mainWindow())
-  end)
+  applyFrame(application:focusedWindow() or application:mainWindow())
 end
 
 for key, app in pairs(APP_BINDINGS) do
