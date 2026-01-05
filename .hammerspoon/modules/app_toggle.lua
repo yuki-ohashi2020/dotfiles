@@ -1,9 +1,3 @@
-hs.hotkey.bind({"ctrl","alt"}, "o", function()
-  toggleApp("Obsidian", {
-    x = 100, y = 100, w = 1200, h = 800
-  })
-end)
-
 local function toggleApp(appName, frame)
   local app = hs.application.get(appName)
 
@@ -35,3 +29,11 @@ local function toggleApp(appName, frame)
     win:setFrame(frame)
   end
 end
+
+
+hs.hotkey.bind({"ctrl","alt"}, "o", function()
+  toggleApp("Obsidian", {
+    x = 100, y = 100, w = 1200, h = 800
+  })
+end)
+
