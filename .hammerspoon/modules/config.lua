@@ -5,10 +5,11 @@ APP_BINDINGS = {
 
   a = { name = "Activity Monitor" },
 
-  [","] = {
-    name = "BetterTouchTool",
-    bundleID = "com.hegenberg.BetterTouchTool"
-  },
+ [","] = {
+  action = function()
+    hs.urlevent.openURL("bettertouchtool://openPreferences")
+  end
+},
   t = {
     name = "iTerm",
     bundleID = "com.googlecode.iterm2"
