@@ -35,6 +35,40 @@ hs.pathwatcher
 require("modules.config")
 require("modules.app_toggle")
 
+local volumeMenuBar = hs.menubar.new()
+
+local function updateVolume()
+    -- currentOutputDevice() ではなく defaultOutputDevice() を使用
+    local device = hs.audiodevice.defaultOutputDevice()
+    
+    if device then
+        local vol = device:volume()
+        local muted = device:muted()
+        
+        if muted then
+            volumeMenuBar:setTitle("🔇 Muted")
+        else
+            volumeMenuBar:setTitle(string.format("🔊 %.0f%%", vol))
+        end
+    else
+        volumeMenuBar:setTitle("🚫 No Device")
+    end
+end
+
+-- クリックでミュート切り替え
+volumeMenuBar:setClickCallback(function()
+    local device = hs.audiodevice.defaultOutputDevice()
+    if device then
+        device:setMuted(not device:muted())
+        updateVolume()
+    end
+end)
+
+-- 2秒ごとに更新
+hs.timer.doEvery(2, updateVolume)
+
+-- 初回実行
+updateVolume()
 
 -- 動作エラーがなければコードをコミットする
 require("modules.git")
