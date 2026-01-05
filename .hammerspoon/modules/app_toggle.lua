@@ -31,9 +31,20 @@ local function toggleApp(appName, frame)
 end
 
 
-hs.hotkey.bind({"ctrl","alt"}, "o", function()
-  toggleApp("Obsidian", {
-    x = 100, y = 100, w = 1200, h = 800
-  })
-end)
 
+APP_BINDINGS = {
+  o = {
+    name = "Obsidian",
+    frame = { x = 100, y = 100, w = 1200, h = 10 }
+  },
+  v = {
+    name = "Vivaldi",
+    frame = { x = 50, y = 50, w = 1400, h = 900 }
+  },
+}
+MOD_APP = {"ctrl", "alt"}
+for key, app in pairs(APP_BINDINGS) do
+  hs.hotkey.bind(MOD_APP, key, function()
+    toggleApp(app.name, app.frame)
+  end)
+end
