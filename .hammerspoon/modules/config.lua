@@ -1,7 +1,16 @@
 MOD_APP_KEY = {"ctrl", "alt", "shift"}
 
 APP_BINDINGS = {
-  b = { name = "Vivaldi"},
+  space = { name = "Alfred" },
+
+  a = { name = "Activity Monitor" },
+
+  [","] = {
+    name = "BetterTouchTool",
+    bundleID = "com.hegenberg.BetterTouchTool"
+  },
+
+  b = { name = "Vivaldi" },
   f = { name = "Finder" },
   g = { name = "GitHub" },
   o = { name = "Obsidian" },
