@@ -35,40 +35,19 @@ hs.pathwatcher
 require("modules.config")
 require("modules.app_toggle")
 
-local volumeMenuBar = hs.menubar.new()
-
-local function updateVolume()
-    -- currentOutputDevice() ではなく defaultOutputDevice() を使用
-    local device = hs.audiodevice.defaultOutputDevice()
-    
-    if device then
-        local vol = device:volume()
-        local muted = device:muted()
+-- スリープ状態を監視するウォッチャーの作成
+sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
+    if (eventType == hs.caffeinate.watcher.systemDidWake) then
+        -- スリープから復帰した時に実行したい処理をここに書く
+        hs.alert.show("おかえりなさい、ボス！")
         
-        if muted then
-            volumeMenuBar:setTitle("🔇 Muted")
-        else
-            volumeMenuBar:setTitle(string.format("🔊 %.0f%%", vol))
-        end
-    else
-        volumeMenuBar:setTitle("🚫 No Device")
-    end
-end
-
--- クリックでミュート切り替え
-volumeMenuBar:setClickCallback(function()
-    local device = hs.audiodevice.defaultOutputDevice()
-    if device then
-        device:setMuted(not device:muted())
-        updateVolume()
+        -- 例：Wi-Fiが安定するまで少し待ってから特定のアプリを再起動するなど
+        -- hs.application.launchOrFocus("Slack")
     end
 end)
 
--- 2秒ごとに更新
-hs.timer.doEvery(2, updateVolume)
-
--- 初回実行
-updateVolume()
+-- ウォッチャーの開始
+sleepWatcher:start()
 
 -- 動作エラーがなければコードをコミットする
 require("modules.git")
