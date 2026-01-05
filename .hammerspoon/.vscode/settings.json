@@ -1,12 +1,16 @@
 {
     "Lua.runtime.version": "Lua 5.4",
+    "Lua.workspace.library": [
+        "/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/emmy_annotations"
+    ],
     "Lua.diagnostics.globals": [
         "hs",
         "spoon"
     ],
-    "Lua.workspace.library": [
-        "/Applications/Hammerspoon.app/Contents/Resources/extensions",
-        "~/.hammerspoon/Spoons"
+    "Lua.diagnostics.disable": [
+        "undefined-global"
     ],
-    "Lua.workspace.checkThirdParty": false
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.telemetry.enable": false,
+    "Lua.diagnostics.libraryFiles": "Disable"
 }
