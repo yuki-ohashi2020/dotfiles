@@ -45,6 +45,7 @@ local function toggleApp(app)
   applyFrame(application:focusedWindow() or application:mainWindow())
 end
 
+-- バインドするキーの登録
 for key, app in pairs(APP_BINDINGS) do
   hs.hotkey.bind(MOD_APP_KEY, key, function()
     toggleApp(app)
