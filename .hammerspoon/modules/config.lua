@@ -9,6 +9,10 @@ APP_BINDINGS = {
     name = "BetterTouchTool",
     bundleID = "com.hegenberg.BetterTouchTool"
   },
+  ["_"] = {
+    name = "iTerm",
+    bundleID = "com.googlecode.iterm2"
+  },
 
   b = { name = "Vivaldi" },
   f = { name = "Finder" },
