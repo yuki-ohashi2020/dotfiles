@@ -25,3 +25,7 @@ APP_BINDINGS = {
 -- Git
 -- ==========================================
 -- GIT_NTERVAL = 3 * 60
+
+
+
+print("✅config load success")

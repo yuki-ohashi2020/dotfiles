@@ -52,3 +52,4 @@ for key, app in pairs(APP_BINDINGS) do
   end)
 end
 
+print("✅App Toggle load success")

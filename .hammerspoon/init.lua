@@ -34,38 +34,9 @@ hs.pathwatcher
 -- ==========================================
 require("modules.config")
 require("modules.app_toggle")
+require("modules.system_lock_watcher")
 
--- スリープ状態を監視するウォッチャーの作成
-sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
-    -- ディスプレイがスリープ (イベント 10)
-    if (eventType == 10) then
-        -- 必要に応じてスリープ時の処理
-    end
-    
-    -- ディスプレイがスリープから復帰 (イベント 11)
-    if (eventType == 11) then
-        hs.timer.doAfter(1, function()
-            hs.alert.show("🎉 おかえりなさい、ボス！", 3)
-            hs.sound.getByName("Ping"):play()
-            
-            -- Wi-Fiが安定するまで待ってからアプリを起動する例
-            -- hs.timer.doAfter(2, function()
-            --     hs.application.launchOrFocus("Slack")
-            -- end)
-        end)
-    end
-    
-    -- システム全体のスリープから復帰 (イベント 0)
-    if (eventType == 0) then
-        hs.timer.doAfter(1, function()
-            hs.alert.show("🎉 おかえりなさい、ボス！（システム復帰）", 3)
-            hs.sound.getByName("Ping"):play()
-        end)
-    end
-end)
 
--- ウォッチャーの開始
-sleepWatcher:start()
 
 -- 動作エラーがなければコードをコミットする
 require("modules.git")
