@@ -5,9 +5,12 @@ APP_BINDINGS = {
 
   a = { name = "Activity Monitor" },
 
- [","] = {
+  [","] = {
   action = function()
-    hs.urlevent.openURL("bettertouchtool://openPreferences")
+    hs.urlevent.openURLWithBundle(
+      "bettertouchtool://openPreferences",
+      "com.hegenberg.BetterTouchTool"
+    )
   end
 },
   t = {
