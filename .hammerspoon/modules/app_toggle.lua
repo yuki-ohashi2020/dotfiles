@@ -1,13 +1,10 @@
 local function toggleApp(app)
-  -- app = { name=..., bundleID=..., frame=... }
-
   local application =
     app.bundleID and hs.application.get(app.bundleID)
     or hs.application.find(app.name)
 
   local function applyFrame(win)
     if not win then return end
-
     if app.frame then
       win:setFrame(app.frame)
     else
@@ -15,7 +12,6 @@ local function toggleApp(app)
     end
   end
 
-  -- 起動していなければ起動
   if not application then
     if app.bundleID then
       hs.application.launchOrFocusByBundleID(app.bundleID)
@@ -38,13 +34,11 @@ local function toggleApp(app)
     return
   end
 
-  -- 表示中なら非表示
   if application:isFrontmost() then
     application:hide()
     return
   end
 
-  -- 非表示なら表示
   application:activate(true)
 
   hs.timer.doAfter(0.1, function()
@@ -52,9 +46,8 @@ local function toggleApp(app)
   end)
 end
 
-
 for key, app in pairs(APP_BINDINGS) do
   hs.hotkey.bind(MOD_APP_KEY, key, function()
-    toggleApp(app.name, app.frame)
+    toggleApp(app)
   end)
 end
