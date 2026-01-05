@@ -1,7 +1,6 @@
 MOD_APP_KEY = {"ctrl", "alt", "shift"}
 
 APP_BINDINGS = {
-  space = { name = "Alfred" },
 
   a = { name = "Activity Monitor" },
 
