@@ -1,5 +1,10 @@
--- 3分に一度、git commitとpushをする
-local gitTimer = hs.timer.doEvery(10, function()
+-- ==========================================
+-- auto commit & Push
+-- ==========================================
+-- 3分間隔
+local Interval = 3 * 60
+
+local function autoGitSync()
     local repo = os.getenv("HOME") .. "/dotfiles"
     local timestamp = os.date("%Y/%m/%d %H:%M:%S")
     local commitMsg = string.format("auto commit: %s", timestamp)
@@ -13,4 +18,10 @@ local gitTimer = hs.timer.doEvery(10, function()
     if not status and not string.match(output or "", "nothing to commit") then
         print("Git error:", output)
     end
-end):start()
+end
+
+-- 1. 初回起動時に実行（差分があれば即コミット）
+autoGitSync()
+
+-- 2. 以降、3分間隔で実行
+local gitTimer = hs.timer.doEvery(Interval, autoGitSync):start()
