@@ -1,9 +1,6 @@
 -- ==========================================
 -- auto commit & Push
 -- ==========================================
--- 3分間隔
-local Interval = 3 * 60
-
 local function autoGitSync()
     local repo = os.getenv("HOME") .. "/dotfiles"
     local timestamp = os.date("%Y/%m/%d %H:%M")
