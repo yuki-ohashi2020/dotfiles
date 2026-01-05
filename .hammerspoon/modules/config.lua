@@ -5,5 +5,8 @@ APP_BINDINGS = {
   f = { name = "Finder" },
   g = { name = "GitHub" },
   o = { name = "Obsidian" },
-  v = { bundleID = "com.microsoft.VSCode" },
+  v = {
+    name = "Visual Studio Code",
+    bundleID = "com.microsoft.VSCode"
+  },
 }
