@@ -51,3 +51,4 @@ for key, app in pairs(APP_BINDINGS) do
     toggleApp(app)
   end)
 end
+

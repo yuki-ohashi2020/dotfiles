@@ -1,0 +1,12 @@
+{
+    "Lua.runtime.version": "Lua 5.4",
+    "Lua.diagnostics.globals": [
+        "hs",
+        "spoon"
+    ],
+    "Lua.workspace.library": [
+        "/Applications/Hammerspoon.app/Contents/Resources/extensions",
+        "~/.hammerspoon/Spoons"
+    ],
+    "Lua.workspace.checkThirdParty": false
+}
