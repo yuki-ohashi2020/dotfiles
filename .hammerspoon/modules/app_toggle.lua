@@ -48,6 +48,10 @@ end
 -- バインドするキーの登録
 for key, app in pairs(APP_BINDINGS) do
   hs.hotkey.bind(MOD_APP_KEY, key, function()
-    toggleApp(app)
+    if app.action then
+      app.action()
+    else
+      toggleApp(app)
+    end
   end)
 end
