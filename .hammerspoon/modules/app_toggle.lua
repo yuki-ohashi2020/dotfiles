@@ -34,3 +34,9 @@ local function toggleApp(appName, frame)
   app:activate(true)
   applyFrame(app:mainWindow())
 end
+
+for key, app in pairs(APP_BINDINGS) do
+  hs.hotkey.bind(MOD_APP_KEY, key, function()
+    toggleApp(app.name, app.frame)
+  end)
+end
