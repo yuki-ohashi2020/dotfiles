@@ -19,6 +19,7 @@ local myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", relo
 -- ==========================================
 -- Pluginの読み込み
 -- ==========================================
+require("modules.config")
 require("modules.git")
 require("modules.app_toggle")
 
