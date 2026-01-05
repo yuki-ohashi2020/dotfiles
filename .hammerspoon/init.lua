@@ -1,20 +1,29 @@
--- ==========================================
--- ハンマースプーンの自動リロード設定
--- ==========================================
+local reloadTimer = nil
+
 function reloadConfig(files)
-    doReload = false
-    for _,file in pairs(files) do
-        if file:sub(-4) == ".lua" then
-            doReload = true
-        end
+  local shouldReload = false
+
+  for _, file in pairs(files) do
+    if file:match("%.lua$") then
+      shouldReload = true
+      break
     end
-    if doReload then
-        hs.reload()
+  end
+
+  if shouldReload then
+    if reloadTimer then
+      reloadTimer:stop()
     end
+
+    reloadTimer = hs.timer.doAfter(0.5, function()
+      hs.reload()
+    end)
+  end
 end
 
--- ~/.hammerspoon 内のファイルを監視して、変更があれば reloadConfig を実行
-local myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+hs.pathwatcher
+  .new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
+  :start()
 
 -- ==========================================
 -- Pluginの読み込み
