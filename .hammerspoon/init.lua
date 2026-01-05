@@ -16,7 +16,6 @@ end
 -- ~/.hammerspoon 内のファイルを監視して、変更があれば reloadConfig を実行
 local myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 
-
 -- ==========================================
 -- Pluginの読み込み
 -- ==========================================
