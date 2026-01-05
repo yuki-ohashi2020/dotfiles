@@ -24,4 +24,4 @@ end
 autoGitSync()
 
 -- 2. 以降、3分間隔で実行
-local gitTimer = hs.timer.doEvery(Interval, autoGitSync):start()
+local gitTimer = hs.timer.doEvery(GIT_NTERVAL, autoGitSync):start()
