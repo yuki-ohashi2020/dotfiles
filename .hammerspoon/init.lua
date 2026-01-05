@@ -25,15 +25,7 @@ hs.pathwatcher
   .new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
   :start()
 
-hs.loadSpoon("HSKeybindings")
 
--- HSKeybindings は bindHotkeys ではなく hotkeyBind を使います
--- 第一引数が「修飾キー」、第二引数が「キー」です。
--- 例：F1キーだけで表示する場合
--- show() ではなく toggle() を使うと、押すたびに 表示/非表示 が切り替わります
-hs.hotkey.bind(MOD_APP_KEY, "y", function()
-    spoon.HSKeybindings:toggle()
-end)
 -- ==========================================
 -- Pluginの読み込み
 -- ==========================================
