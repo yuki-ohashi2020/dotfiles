@@ -5,5 +5,5 @@ APP_BINDINGS = {
   f = { name = "Finder" },
   g = { name = "GitHub" },
   o = { name = "Obsidian" },
-
+  v = { name = "VisualStudioCode" },
 }
