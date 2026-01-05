@@ -39,18 +39,26 @@ require("modules.app_toggle")
 sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
     print("Caffeinate event:", eventType)
     
-    -- システムのスリープから復帰
-    if (eventType == hs.caffeinate.watcher.systemDidWake) then
-        print("System woke up!")
-        hs.alert.show("おかえりなさい、ボス！（システム復帰）", 3)
-        hs.notify.new({title="Hammerspoon", informativeText="システムが復帰しました"}):send()
-    end
-    
     -- ディスプレイのスリープから復帰
     if (eventType == hs.caffeinate.watcher.screensDidWake) then
         print("Screens woke up!")
-        hs.alert.show("おかえりなさい、ボス！", 3)
-        hs.notify.new({title="Hammerspoon", informativeText="ディスプレイが復帰しました"}):send()
+        
+        -- 少し待ってから表示（ディスプレイが完全に起動するまで待つ）
+        hs.timer.doAfter(1, function()
+            -- 音を鳴らす
+            hs.alert.show("🎉 おかえりなさい、ボス！", 5)
+            hs.sound.getByName("Ping"):play()
+            print("Alert should be visible now")
+        end)
+    end
+    
+    -- システムのスリープから復帰
+    if (eventType == hs.caffeinate.watcher.systemDidWake) then
+        print("System woke up!")
+        hs.timer.doAfter(1, function()
+            hs.alert.show("🎉 おかえりなさい、ボス！（システム復帰）", 5)
+            hs.sound.getByName("Ping"):play()
+        end)
     end
 end)
 
