@@ -6,7 +6,7 @@ local Interval = 3 * 60
 
 local function autoGitSync()
     local repo = os.getenv("HOME") .. "/dotfiles"
-    local timestamp = os.date("%Y/%m/%d %H:%M:%S")
+    local timestamp = os.date("%Y/%m/%d %H:%M")
     local commitMsg = string.format("auto commit: %s", timestamp)
 
     local cmd = string.format([[
