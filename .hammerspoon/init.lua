@@ -37,17 +37,25 @@ require("modules.app_toggle")
 
 -- スリープ状態を監視するウォッチャーの作成
 sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
+    -- すべてのイベントをログに記録（デバッグ用）
+    print("Caffeinate event:", eventType)
+    
     if (eventType == hs.caffeinate.watcher.systemDidWake) then
-        -- スリープから復帰した時に実行したい処理をここに書く
-        hs.alert.show("おかえりなさい、ボス！")
+        -- スリープから復帰した時の処理
+        print("System woke up!")  -- コンソールログ
+        hs.alert.show("おかえりなさい、ボス！", 3)  -- 3秒間表示
         
-        -- 例：Wi-Fiが安定するまで少し待ってから特定のアプリを再起動するなど
-        -- hs.application.launchOrFocus("Slack")
+        -- 通知センターにも表示（より確実）
+        hs.notify.new({title="Hammerspoon", informativeText="おかえりなさい、ボス！"}):send()
     end
 end)
 
 -- ウォッチャーの開始
 sleepWatcher:start()
+
+-- 起動時の確認メッセージ
+hs.alert.show("スリープウォッチャーが起動しました")
+print("Sleep watcher started")
 
 -- 動作エラーがなければコードをコミットする
 require("modules.git")
