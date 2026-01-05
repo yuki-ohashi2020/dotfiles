@@ -18,8 +18,6 @@ sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
     if (eventType == WAKED) then
         hs.timer.doAfter(WAIT_SEC, function()
             print("✅Caffeinate event: WAKED")
-
-            hs.alert.show("🎉 おかえりなさい、ボス！", 3)
             hs.audiodevice.defaultOutputDevice():setVolume(VOLUME_PER)
             
             -- Wi-Fiが安定するまで待ってからアプリを起動する例
