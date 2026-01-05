@@ -37,16 +37,20 @@ require("modules.app_toggle")
 
 -- スリープ状態を監視するウォッチャーの作成
 sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
-    -- すべてのイベントをログに記録（デバッグ用）
     print("Caffeinate event:", eventType)
     
+    -- システムのスリープから復帰
     if (eventType == hs.caffeinate.watcher.systemDidWake) then
-        -- スリープから復帰した時の処理
-        print("System woke up!")  -- コンソールログ
-        hs.alert.show("おかえりなさい、ボス！", 3)  -- 3秒間表示
-        
-        -- 通知センターにも表示（より確実）
-        hs.notify.new({title="Hammerspoon", informativeText="おかえりなさい、ボス！"}):send()
+        print("System woke up!")
+        hs.alert.show("おかえりなさい、ボス！（システム復帰）", 3)
+        hs.notify.new({title="Hammerspoon", informativeText="システムが復帰しました"}):send()
+    end
+    
+    -- ディスプレイのスリープから復帰
+    if (eventType == hs.caffeinate.watcher.screensDidWake) then
+        print("Screens woke up!")
+        hs.alert.show("おかえりなさい、ボス！", 3)
+        hs.notify.new({title="Hammerspoon", informativeText="ディスプレイが復帰しました"}):send()
     end
 end)
 
