@@ -38,27 +38,22 @@ require("modules.app_toggle")
 -- スリープ状態を監視するウォッチャーの作成
 sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
     print("Caffeinate event:", eventType)
+    print("screensDidWake value:", hs.caffeinate.watcher.screensDidWake)
+    print("systemDidWake value:", hs.caffeinate.watcher.systemDidWake)
+    print("Match?", eventType == hs.caffeinate.watcher.screensDidWake)
     
-    -- ディスプレイのスリープから復帰
-    if (eventType == hs.caffeinate.watcher.screensDidWake) then
-        print("Screens woke up!")
-        
-        -- 少し待ってから表示（ディスプレイが完全に起動するまで待つ）
+    -- 数値で直接比較
+    if (eventType == 11) then
+        print("Event 11 detected!")
         hs.timer.doAfter(1, function()
-            -- 音を鳴らす
             hs.alert.show("🎉 おかえりなさい、ボス！", 5)
             hs.sound.getByName("Ping"):play()
             print("Alert should be visible now")
         end)
     end
     
-    -- システムのスリープから復帰
-    if (eventType == hs.caffeinate.watcher.systemDidWake) then
-        print("System woke up!")
-        hs.timer.doAfter(1, function()
-            hs.alert.show("🎉 おかえりなさい、ボス！（システム復帰）", 5)
-            hs.sound.getByName("Ping"):play()
-        end)
+    if (eventType == 10) then
+        print("Event 10 detected! (screen sleep)")
     end
 end)
 
