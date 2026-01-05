@@ -37,32 +37,35 @@ require("modules.app_toggle")
 
 -- スリープ状態を監視するウォッチャーの作成
 sleepWatcher = hs.caffeinate.watcher.new(function(eventType)
-    print("Caffeinate event:", eventType)
-    print("screensDidWake value:", hs.caffeinate.watcher.screensDidWake)
-    print("systemDidWake value:", hs.caffeinate.watcher.systemDidWake)
-    print("Match?", eventType == hs.caffeinate.watcher.screensDidWake)
+    -- ディスプレイがスリープ (イベント 10)
+    if (eventType == 10) then
+        -- 必要に応じてスリープ時の処理
+    end
     
-    -- 数値で直接比較
+    -- ディスプレイがスリープから復帰 (イベント 11)
     if (eventType == 11) then
-        print("Event 11 detected!")
         hs.timer.doAfter(1, function()
-            hs.alert.show("🎉 おかえりなさい、ボス！", 5)
+            hs.alert.show("🎉 おかえりなさい、ボス！", 3)
             hs.sound.getByName("Ping"):play()
-            print("Alert should be visible now")
+            
+            -- Wi-Fiが安定するまで待ってからアプリを起動する例
+            -- hs.timer.doAfter(2, function()
+            --     hs.application.launchOrFocus("Slack")
+            -- end)
         end)
     end
     
-    if (eventType == 10) then
-        print("Event 10 detected! (screen sleep)")
+    -- システム全体のスリープから復帰 (イベント 0)
+    if (eventType == 0) then
+        hs.timer.doAfter(1, function()
+            hs.alert.show("🎉 おかえりなさい、ボス！（システム復帰）", 3)
+            hs.sound.getByName("Ping"):play()
+        end)
     end
 end)
 
 -- ウォッチャーの開始
 sleepWatcher:start()
-
--- 起動時の確認メッセージ
-hs.alert.show("スリープウォッチャーが起動しました")
-print("Sleep watcher started")
 
 -- 動作エラーがなければコードをコミットする
 require("modules.git")
