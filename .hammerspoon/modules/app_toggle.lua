@@ -1,16 +1,24 @@
 local function toggleApp(appName, frame)
   local app = hs.application.get(appName)
 
+  local function applyFrame(win)
+    if not win then return end
+
+    if frame then
+      win:setFrame(frame)
+    else
+      -- frame 未指定なら、そのウィンドウがある画面いっぱい
+      win:setFrame(win:screen():frame())
+    end
+  end
+
   -- 起動していなければ起動
   if not app then
     hs.application.launchOrFocus(appName)
     hs.timer.doAfter(0.5, function()
       local a = hs.application.get(appName)
       if a then
-        local win = a:mainWindow()
-        if win and frame then
-          win:setFrame(frame)
-        end
+        applyFrame(a:mainWindow())
       end
     end)
     return
@@ -24,18 +32,5 @@ local function toggleApp(appName, frame)
 
   -- 非表示なら表示
   app:activate(true)
-  local win = app:mainWindow()
-  if win and frame then
-    win:setFrame(frame)
-  end
-end
-
-
-
-
-
-for key, app in pairs(APP_BINDINGS) do
-  hs.hotkey.bind(MOD_APP_KEY, key, function()
-    toggleApp(app.name, app.frame)
-  end)
+  applyFrame(app:mainWindow())
 end
