@@ -23,6 +23,16 @@ local myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", relo
 require("modules.git")
 -- AppLauncherをロード
 hs.loadSpoon("AppLauncher")
+spoon.AppLauncher.modifiers = {"ctrl", "alt"}
+
+-- キーとアプリの紐付け（左がキー、右がアプリケーション名）
+spoon.AppLauncher:bindHotkeys({
+  s = "Slack",
+  o = "Obsidian",
+  c = "Google Chrome",
+  f = "Finder",
+  t = "Terminal"
+})
 
 
 -- Configが正常に読み込まれたらアラートを表示する
