@@ -2,6 +2,7 @@ brew "emojify"
 brew "gh"
 brew "ghq"
 brew "git"
+brew "mas"
 brew "peco"
 brew "stow"
 brew "the_silver_searcher"
@@ -10,11 +11,20 @@ brew "trash", link: true
 brew "tree"
 brew "vim"
 cask "alfred"
+cask "ankerwork"
 cask "applite"
 cask "bettertouchtool"
 cask "brewlet"
 cask "cork"
 cask "github"
 cask "google-japanese-ime"
+cask "hammerspoon"
+cask "karabiner-elements"
 cask "lastpass"
+cask "logi-options+"
 cask "obsidian"
+cask "vivaldi"
+mas "Display Menu", id: 549083868
+mas "LensOCR", id: 1549961729
+mas "The Unarchiver", id: 425424353
+mas "Usage", id: 1561788435
