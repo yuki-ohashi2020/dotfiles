@@ -21,9 +21,9 @@ cask "google-japanese-ime"
 cask "hammerspoon"
 cask "karabiner-elements"
 cask "lastpass"
-cask "logi-options+"
 cask "obsidian"
 cask "vivaldi"
+cask "warp"
 mas "Display Menu", id: 549083868
 mas "LensOCR", id: 1549961729
 mas "The Unarchiver", id: 425424353
