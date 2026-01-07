@@ -30,6 +30,24 @@ if [[ ! -d ${HOME}/.vim/bundle/neobundle.vim ]]; then
     git clone https://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
     vim -c ':NeoBundleInstall!' -c ':q!'
 fi
+# brewコマンドにパスが通っているか確認
+if ! command -v brew &> /dev/null; then
+    echo "Homebrewが見つかりません。インストールを開始します..."
+
+    # Xcode Command Line Toolsのインストール（ダイアログが出るので手動承認が必要）
+    xcode-select --install
+
+    # Homebrewのインストール実行
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Apple Silicon Macの場合、パスを通す処理が必要（重要！）
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+else
+    echo "Homebrewは既にインストールされています。"
+fi
 
 if [ `uname` = "Darwin" ]; then
     uname
@@ -38,13 +56,19 @@ if [ `uname` = "Darwin" ]; then
     # brewがinstallされていなければ、インストールする
     which brew
     if [ $? -eq 1 ]; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        xcode-select --install
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
-    chsh -s /bin/zsh
+    # chsh -s /bin/zsh
 
-    chmod 755 /usr/local/share/zsh/site-functions
-    chmod 755 /usr/local/share/zsh
+    # chmod 755 /usr/local/share/zsh/site-functions
+    # chmod 755 /usr/local/share/zsh
 fi
 
-./recipe.sh
+
+
+# .DS_Storeのネットワークドライブへの作成を禁止
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# .DS_Storeの外部ストレージへの作成を禁止
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
