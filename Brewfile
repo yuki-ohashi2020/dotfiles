@@ -1,3 +1,4 @@
+brew "chezmoi"
 brew "emojify"
 brew "gh"
 brew "ghq"
