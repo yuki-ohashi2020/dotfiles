@@ -31,4 +31,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 killall Finder
 killall SystemUIServer
 
+
+brew install
+
 echo "✅ macOSの設定が完了しました。"
