@@ -5,7 +5,6 @@ brew "ghq"
 brew "git"
 brew "mas"
 brew "peco"
-brew "stow"
 brew "the_silver_searcher"
 brew "tmux"
 brew "trash", link: true
