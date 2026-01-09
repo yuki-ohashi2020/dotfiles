@@ -49,6 +49,9 @@ echo "✅ すべてのセットアップが完了しました"
 
 exit
 
+# 以下の設定が不要になる
+# run_onchange_で自動化をすること
+#
 # ドットファイルをホームディレクトリにシムリンクを貼る
 for i in `ls -a`
 do
@@ -76,12 +79,6 @@ fi
 
     # chsh -s /bin/zsh
 
-    # chmod 755 /usr/local/share/zsh/site-functions
-    # chmod 755 /usr/local/share/zsh
 
 
 
-# .DS_Storeのネットワークドライブへの作成を禁止
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-# .DS_Storeの外部ストレージへの作成を禁止
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
