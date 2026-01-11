@@ -6,8 +6,7 @@ APP_BINDINGS = {
 
 
   t = {
-    name = "iTerm",
-    bundleID = "com.googlecode.iterm2"
+    name = "Warp"
   },
 
   b = { name = "Vivaldi" },
