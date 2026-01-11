@@ -35,3 +35,20 @@ killall SystemUIServer
 brew install
 
 echo "✅ macOSの設定が完了しました。"
+
+
+
+#######################################################################
+# vimの設定
+#######################################################################
+mkdir -p ${HOME}/.vim/
+mkdir -p ${HOME}/.vim/bundle
+
+# NeoBundleのインストール
+if [[ ! -d ${HOME}/.vim/bundle/neobundle.vim ]]; then
+    git clone https://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
+    vim -c ':NeoBundleInstall!' -c ':q!'
+fi
+
+
+    # chsh -s /bin/zsh

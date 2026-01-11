@@ -1,7 +1,6 @@
 # ~/.local/share/chezmoi/.chezmoiignore
 
-# curl用のスクリプトはターゲットに配置しない
-install.sh
+README.md
 
 *.swp
 .DS_Store
