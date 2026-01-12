@@ -8,11 +8,12 @@ echo ""
 if [ -n "$(git status --porcelain)" ]; then
     echo "🚀 Changes detected. Pushing to GitHub..."
     git add .
-    git commit -m " xxx  sss xx{{ .chezmoi.hostname }}"
+    git commit -m " xxx  sss xx{{ .chezmoi.hostname }} "
     git push origin main
 else
-    echo "✨ No changes to sync."
+    echo "✨ No changes to sync. "
 fi
 
 
 # test1
+# force run 2026年 1月12日 月曜日 10時27分38秒 JST

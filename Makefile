@@ -4,6 +4,7 @@ help:
 	cat Makefile
 
 apply:
+	chezmoi re-add
 	chezmoi apply -v
 
 diff:
