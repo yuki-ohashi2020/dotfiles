@@ -11,6 +11,9 @@ apply:
 	chezmoi apply -v
 
 diff:
+	@echo "更新対象"
+	chezmoi status
+	@echo "更新詳細"
 	chezmoi diff
 
 

@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# ソースディレクトリへ強制移動（テンプレート変数を使用）
-cd "{{ .chezmoi.sourceDir }}"
+set -e
+
+cd "$CHEZMOI_SOURCE_DIR"
+
+pwd
 
 # ここでGit操作を行う
 if [ -n "$(git status --porcelain)" ]; then
