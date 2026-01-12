@@ -1,4 +1,4 @@
-.PHONY: help dry-run apply diff
+.PHONY: help dry-run apply diff upgrade dump
 
 help:
 	cat Makefile
@@ -20,3 +20,7 @@ upgrade:
 	@echo "brewと管理パッケージを更新します..."
 	brew update
 	brew upgrade
+
+dump:
+	@echo "管理パッケージをdumpします..."
+	brew bundle dump --force --describe --file ./Brewfile
