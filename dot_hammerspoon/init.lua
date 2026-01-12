@@ -37,9 +37,5 @@ require("modules.app_toggle")
 require("modules.system_lock_watcher")
 
 
-
--- 動作エラーがなければコードをコミットする
-require("modules.git")
-
 -- Configが正常に読み込まれたらアラートを表示する
 hs.alert.show("Config Loaded 🚀")

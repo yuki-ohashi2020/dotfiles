@@ -16,4 +16,7 @@ diff:
 	@echo "更新詳細"
 	chezmoi diff
 
-
+upgrade:
+	@echo "brewと管理パッケージを更新します..."
+	brew update
+	brew upgrade
