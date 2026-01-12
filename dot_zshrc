@@ -316,6 +316,8 @@ alias drm_all='docker rmi $(sudo docker images -q)'
 alias dm='docker-machine'
 alias dme='eval $(docker-machine env default)'
 
+# chezmoi
+alias ch='chezmoi'
 alias make='make -f $(chezmoi source-path)/Makefile'
 
 # ドットファイルのリポジトリへ一撃で移動
