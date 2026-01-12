@@ -23,4 +23,4 @@ upgrade:
 
 dump:
 	@echo "管理パッケージをdumpします..."
-	brew bundle dump --force --describe --file ./Brewfile
+	brew bundle dump --force --describe --file "$(SOURCE_DIR)/Brewfile"
