@@ -71,7 +71,19 @@ REPORTTIME=3
 # complete
 ######################################
 fpath=($HOME/.zsh/zsh-completions/src(N-/) $fpath)
-autoload -Uz compinit; compinit -u
+autoload -Uz compinit
+compinit -u
+# Makefileの中を読み込む
+zstyle ':completion:*:*:make:*' make-files "$(chezmoi source-path)/Makefile"
+make() {
+  if [[ -f Makefile ]]; then
+    command make "$@"
+  else
+    command make -f "$(chezmoi source-path)/Makefile" "$@"
+  fi
+}
+compdef _make make
+
 # complete after = --prefix=/usr => --prefix=<Tab>
 setopt magic_equal_subst
 # candidate pack
@@ -303,3 +315,14 @@ alias drm='docker ps -qa | xargs docker rm'
 alias drm_all='docker rmi $(sudo docker images -q)'
 alias dm='docker-machine'
 alias dme='eval $(docker-machine env default)'
+
+alias make='make -f $(chezmoi source-path)/Makefile'
+
+# ドットファイルのリポジトリへ一撃で移動
+function cd() {
+  if [[ "$1" == "dot" ]]; then
+    builtin cd "$(chezmoi source-path)"
+  else
+    builtin cd "$@"
+  fi
+}

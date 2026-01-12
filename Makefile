@@ -1,7 +1,10 @@
-.PHONY: setup
+.PHONY: help apply diff
 
 help:
 	cat Makefile
 
-setup:
-	./setup.sh
+apply:
+	chezmoi apply -v
+
+diff:
+	chezmoi diff

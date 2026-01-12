@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# ソースディレクトリへ強制移動（テンプレート変数を使用）
+cd "{{ .chezmoi.sourceDir }}"
+
+# ここでGit操作を行う
+if [ -n "$(git status --porcelain)" ]; then
+    echo "🚀 Changes detected. Pushing to GitHub..."
+    git add .
+    git commit -m "auto: sync dotfiles from {{ .chezmoi.hostname }}"
+    git push origin main
+else
+    echo "✨ No changes to sync."
+fi

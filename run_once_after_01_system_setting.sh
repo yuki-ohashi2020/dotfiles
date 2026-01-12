@@ -1,11 +1,5 @@
 #!/bin/bash
 
-if [ "$SHELL" != "/bin/zsh" ]; then
-    echo "🐚 デフォルトシェルを zsh に変更します..."
-    chsh -s /bin/zsh
-fi
-
-# 実行時に何をしているか分かりやすく表示
 echo "⚙️  macOSのシステム設定を最適化しています..."
 
 # キーのリピート速度を最速に設定
@@ -31,8 +25,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 killall Finder
 killall SystemUIServer
 
-
-brew install
+echo ""
 
 echo "✅ macOSの設定が完了しました。"
 
@@ -41,14 +34,11 @@ echo "✅ macOSの設定が完了しました。"
 #######################################################################
 # vimの設定
 #######################################################################
-mkdir -p ${HOME}/.vim/
-mkdir -p ${HOME}/.vim/bundle
+#mkdir -p ${HOME}/.vim/
+#mkdir -p ${HOME}/.vim/bundle
 
 # NeoBundleのインストール
 if [[ ! -d ${HOME}/.vim/bundle/neobundle.vim ]]; then
     git clone https://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
     vim -c ':NeoBundleInstall!' -c ':q!'
 fi
-
-
-    # chsh -s /bin/zsh
