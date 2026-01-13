@@ -92,8 +92,10 @@ defaults write com.apple.dock wvous-br-corner -int 0
 
 # ロック画面での通知プレビューを「常にオフ」にする
 defaults write com.apple.notificationcenterui "show-previews" -int 0
-# ロック画面での通知を「常にオフ」にする
+# ロック画面での通知を「常にオフ」にするs
 defaults write com.apple.ncprefs "lock-screen-notifications" -bool false
+# ディスプレイがスリープ中に通知で画面が点灯するのをオフにする
+defaults write com.apple.notificationcenterui "at-login" -bool false
 
 # 設定を反映するために必要なアプリを再起動
 killall Finder
