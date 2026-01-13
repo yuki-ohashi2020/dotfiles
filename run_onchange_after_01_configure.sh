@@ -9,12 +9,31 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+# Macのアプリからのファイル指定はFinderを使用することを強制させられている
+# つまり、代替ツールを指定することができない
+# そのため、Finderの設定をカスタマイズして使いやすくしている
+
 # Finder: 拡張子を常に表示
-defaults write NSGlobalDomain AppleShowAllFiles -bool true
-# Finder: リスト表示
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Finder: 隠しファイルを表示
+defaults write com.apple.finder AppleShowAllFiles -bool true
+# Finder: フォルダを先に表示
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+# Finder: リスト形式で表示(.DS_storeの表示履歴が優先される)
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-# Finder: ステータスバーを表示
+# Finder: ステータスバーを表示(Finderウィンドウの最下部)
 defaults write com.apple.finder ShowStatusBar -bool true
+# Finder: パスバーを表示
+defaults write com.apple.finder ShowPathbar -bool true
+# Finder: 検索のデフォルトを開いているフォルダではなく、ディスク全体で検索する
+defaults write com.apple.finder FXDefaultSearchScope -string "SCev"
+# Finder: デスクトップにボリュームを表示しない
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+
+
 
 # スクリーンショットの保存先を ~/Downloads/Screenshots に変更
 mkdir -p ~/Downloads/Screenshots
