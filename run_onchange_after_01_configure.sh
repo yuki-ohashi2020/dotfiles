@@ -6,13 +6,16 @@ echo "⚙️  macOSのシステム設定を最適化しています..."
 
 # キーのリピート速度を最速に設定
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Macのアプリからのファイル指定はFinderを使用することを強制させられている
 # つまり、代替ツールを指定することができない
 # そのため、Finderの設定をカスタマイズして使いやすくしている
 
+# Finder: 新規ファインダーのデフォルトのパスをホームディレクトリにする
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 # Finder: 拡張子を常に表示
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Finder: 隠しファイルを表示
@@ -39,6 +42,8 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 # スクリーンショットの保存先を ~/Downloads/Screenshots に変更
 mkdir -p ~/Downloads/Screenshots
 defaults write com.apple.screencapture location ~/Downloads/Screenshots
+# スクリーンショットの影を消す
+defaults write com.apple.screencapture disable-shadow -bool true
 
 # .DS_Storeのネットワークドライブへの作成を禁止
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
