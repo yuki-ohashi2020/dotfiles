@@ -39,6 +39,10 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
 
+# スクロールの方向を従来型にする
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+
 # スクリーンショットの保存先を ~/Downloads/Screenshots に変更
 mkdir -p ~/Downloads/Screenshots
 defaults write com.apple.screencapture location ~/Downloads/Screenshots
@@ -50,8 +54,18 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # .DS_Storeの外部ストレージへの作成を禁止
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+# アプリケーション終了時の確認ダイアログを無効化
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+
+# ファイルをゴミ箱に入れる前の確認を無効化
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Dock非表示
+defaults write com.apple.dock autohide -bool true
+
 # 設定を反映するために必要なアプリを再起動
 killall Finder
+killall Dock
 killall SystemUIServer
 
 echo "✅ macOSの設定が完了しました。"
