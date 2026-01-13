@@ -100,6 +100,8 @@ defaults write com.apple.notificationcenterui "at-login" -bool false
 # 設定を反映するために必要なアプリを再起動
 killall Finder
 killall Dock
+killall cfprefsd
+killall NotificationCenter
 killall SystemUIServer
 
 echo "✅ macOSの設定が完了しました。"
