@@ -41,7 +41,8 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
 # スクロールの方向を従来型にする
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-
+# スクロール速度(数値が大きいほど早い)
+defaults write NSGlobalDomain com.apple.scrollwheel.scaling -float 1.5
 
 # スクリーンショットの保存先を ~/Downloads/Screenshots に変更
 mkdir -p ~/Downloads/Screenshots
