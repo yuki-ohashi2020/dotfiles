@@ -71,6 +71,12 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # 30日経ったゴミ箱のファイルを自動削除する設定を有効化
 defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
+# 西暦の週の始まりを月曜(2)に設定
+# (1が日曜、2が月曜、7が土曜)
+defaults write NSGlobalDomain AppleFirstWeekday -dict "gregorian" 2
+# 24時間表記にする
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
+
 # Dock非表示
 defaults write com.apple.dock autohide -bool true
 
