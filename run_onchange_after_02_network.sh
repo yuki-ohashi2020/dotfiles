@@ -15,4 +15,4 @@ sudo dscacheutil -flushcache
 sudo killall -HUP mDNSResponder
 
 # 設定の確認
-networksetup -getdnsservers Wi-Fiss
+networksetup -getdnsservers Wi-Fi
