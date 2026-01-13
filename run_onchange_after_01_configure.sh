@@ -77,9 +77,11 @@ defaults write NSGlobalDomain AppleFirstWeekday -dict "gregorian" 2
 # 24時間表記にする
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 
-# Dock非表示
+# Dockの自動表示を非表示にする
 defaults write com.apple.dock autohide -bool true
-
+# Dock表示の待ち時間を16分(1000)にする
+# 実質、Dockを使わない
+defaults write com.apple.dock autohide-delay -float 1000
 # 設定を反映するために必要なアプリを再起動
 killall Finder
 killall Dock
