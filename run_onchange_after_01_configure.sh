@@ -25,6 +25,8 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 defaults write com.apple.finder ShowStatusBar -bool true
 # Finder: パスバーを表示
 defaults write com.apple.finder ShowPathbar -bool true
+# Finder: タブバーを表示
+defaults write com.apple.finder ShowTabView -bool true
 # Finder: 検索のデフォルトを開いているフォルダではなく、ディスク全体で検索する
 defaults write com.apple.finder FXDefaultSearchScope -string "SCev"
 # Finder: デスクトップにボリュームを表示しない
