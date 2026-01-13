@@ -11,7 +11,8 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Finder: 拡張子を常に表示
 defaults write NSGlobalDomain AppleShowAllFiles -bool true
-
+# Finder: リスト表示
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Finder: ステータスバーを表示
 defaults write com.apple.finder ShowStatusBar -bool true
 
