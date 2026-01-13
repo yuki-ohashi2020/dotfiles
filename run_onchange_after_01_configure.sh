@@ -7,6 +7,7 @@ echo "⚙️  macOSのシステム設定を最適化しています..."
 # キーのリピート速度を最速に設定
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Finder: 拡張子を常に表示
 defaults write NSGlobalDomain AppleShowAllFiles -bool true

@@ -76,14 +76,14 @@ autoload -Uz compinit
 compinit -u
 # Makefileの中を読み込む
 zstyle ':completion:*:*:make:*' make-files "$(chezmoi source-path)/Makefile"
-make() {
+function make() {
   if [[ -f Makefile ]]; then
     command make "$@"
   else
     command make -f "$(chezmoi source-path)/Makefile" "$@"
   fi
 }
-compdef _make make
+compdef make=make
 
 # complete after = --prefix=/usr => --prefix=<Tab>
 setopt magic_equal_subst
