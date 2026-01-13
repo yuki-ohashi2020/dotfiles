@@ -68,6 +68,8 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 # ファイルをゴミ箱に入れる前の確認を無効化
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# 30日経ったゴミ箱のファイルを自動削除する設定を有効化
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # Dock非表示
 defaults write com.apple.dock autohide -bool true

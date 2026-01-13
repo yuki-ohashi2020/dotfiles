@@ -3,6 +3,7 @@
 
 echo "⚙️  DNSの設定をします..."
 
+# プロバイダのDNSのほうが早かったのだが、セキュリティ面も考慮して変更しておく
 # プライマリー: Cloudflare
 # セカンダリー：Google Public DNS
 DNS_SERVERS="1.1.1.1 8.8.8.8"
