@@ -79,9 +79,20 @@ defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 
 # Dockの自動表示を非表示にする
 defaults write com.apple.dock autohide -bool true
-# Dock表示の待ち時間を16分(1000)にする
+# Dock表示の待機時間を約16分にする
 # 実質、Dockを使わない
 defaults write com.apple.dock autohide-delay -float 1000
+
+
+# ホットコーナーを使用しない
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
+
+# ロック画面での通知プレビューを「常にオフ」にする
+defaults write com.apple.notificationcenterui "show-previews" -int 0
+
 # 設定を反映するために必要なアプリを再起動
 killall Finder
 killall Dock
