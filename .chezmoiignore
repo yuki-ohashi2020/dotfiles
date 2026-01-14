@@ -6,3 +6,5 @@ README.md
 .DS_Store
 Makefile
 Brewfile
+
+keyboard/**
