@@ -13,6 +13,7 @@ default:
 [private]
 apply:
    chezmoi apply --verbose --interactive
+   @# direnvが自動でリロードするので、sourceコマンドは不要
 
 # 変更の詳細を表示
 diff:

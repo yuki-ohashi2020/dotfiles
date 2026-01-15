@@ -329,3 +329,7 @@ function cd() {
     builtin cd "$@"
   fi
 }
+
+if [ -x "$(command -v just)" ]; then
+    source <(just --completions zsh)
+fi
