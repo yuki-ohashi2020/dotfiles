@@ -7,7 +7,8 @@ dry-run:
 	@echo "実行スクリプトの順序check"
 	chezmoi apply --dry-run --verbose
 
-apply:
+# セットアップコマンド
+apply
 	chezmoi apply -v
 
 diff:
