@@ -8,3 +8,6 @@ Brewfile
 
 .Justfile
 bin/
+
+# APIキーなどが書き込まれることがあるので除外必須
+.envrc
