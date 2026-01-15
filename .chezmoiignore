@@ -7,5 +7,5 @@ README.md
 Makefile
 Brewfile
 
-dot_Justfile
+.Justfile
 
