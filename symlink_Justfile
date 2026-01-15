@@ -17,7 +17,7 @@ dry-run:
 setup:
 	echo "初期セットアップを実行します..."
 	chezmoi apply -v
-    
+
 diff:
 	echo "更新対象"
 	chezmoi status
