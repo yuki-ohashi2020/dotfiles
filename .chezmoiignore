@@ -8,4 +8,4 @@ Makefile
 Brewfile
 
 .Justfile
-
+bin/
