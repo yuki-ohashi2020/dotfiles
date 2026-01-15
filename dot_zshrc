@@ -333,3 +333,6 @@ function cd() {
 if [ -x "$(command -v just)" ]; then
     source <(just --completions zsh)
 fi
+
+# direnvの設定
+eval "$(direnv hook zsh)"
