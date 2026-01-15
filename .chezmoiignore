@@ -4,7 +4,6 @@ README.md
 
 *.swp
 .DS_Store
-Makefile
 Brewfile
 
 .Justfile

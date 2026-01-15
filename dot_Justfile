@@ -4,7 +4,7 @@ set fallback := true
 # chezmoiにパスが通ってなければエラーで終了する
 SOURCE_DIR := `chezmoi source-path`
 BIN_DIR    := SOURCE_DIR + "/bin"
-# スクリプトをパス指定無しで実行できるようにする
+# Justfile内でスクリプトをパス指定無しで実行できるようにする
 export PATH := BIN_DIR + ":" + env_var("PATH")
 
 default:
@@ -45,7 +45,7 @@ update:
     @deploy.sh
 
 upgrade:
-    echo "brewと管理パッケージを更新します..."
+    @echo "brewと管理パッケージを更新します..."
     brew update
     brew upgrade
 
