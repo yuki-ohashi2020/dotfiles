@@ -9,5 +9,6 @@ Brewfile
 .Justfile
 bin/
 
-# APIキーなどが書き込まれることがあるので除外必須
-.envrc
+.envrc.local
+# direnvが一時的に作成するキャッシュディレクトリ
+.direnv/

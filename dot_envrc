@@ -1,0 +1,4 @@
+PATH_add /opt/homebrew/bin
+
+# 個人用のenvrc(APIキーなどコミットさせないものを記述)
+source_env_if_exists .envrc.local
