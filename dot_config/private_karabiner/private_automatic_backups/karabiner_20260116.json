@@ -3923,16 +3923,16 @@
             "selected": true,
             "simple_modifications": [
                 {
-                    "from": { "key_code": "japanese_kana" },
-                    "to": [{ "key_code": "right_command" }]
-                },
-                {
                     "from": { "pointing_button": "button4" },
                     "to": [{ "key_code": "f13" }]
                 },
                 {
                     "from": { "pointing_button": "button5" },
                     "to": [{ "key_code": "f14" }]
+                },
+                {
+                    "from": { "key_code": "japanese_kana" },
+                    "to": [{ "key_code": "escape" }]
                 }
             ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "jis" }
