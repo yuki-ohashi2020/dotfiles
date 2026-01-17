@@ -17,6 +17,7 @@ apply:
 
 # 変更の詳細を表示
 diff:
+    @echo "dotfilesリポジトリとホームディレクトリの差分を表示します..."
     chezmoi status
     chezmoi diff
 
@@ -32,16 +33,12 @@ setup:
     echo "- run_xxx"
     just apply
 
-reset:
-    echo "以下のファイルをリセットします..."
-    just diff
-    echo "実行対象のファイル一覧:"
-    echo "- run_onchange_xxx"
-    echo "- run_xxx"
-    echo "⚠️注意: 変更内容は失われます。"
-    just apply
-
-update:
+sync:
+    @echo "dotfilesリポジトリに同期します..."
+    @echo "From: $HOME => To: $SOURCE_DIR"
+    chezmoi add -r "$HOME/.config/karabiner"
+    
+deploy:
     @echo "dotfilesリポジトリを更新します..."
     @deploy.sh
 

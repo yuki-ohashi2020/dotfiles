@@ -21,7 +21,10 @@
                         "description": "Caps Lock to Ctrl+Option+Shift (Hyper without Cmd)",
                         "manipulators": [
                             {
-                                "from": { "key_code": "caps_lock" },
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
                                 "to": [
                                     {
                                         "key_code": "left_shift",
