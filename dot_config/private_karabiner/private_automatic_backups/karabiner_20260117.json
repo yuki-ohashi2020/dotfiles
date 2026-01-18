@@ -4,49 +4,15 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Cmd+JでGoogle日本語入力、Cmd+Kで英語(ABC)に切り替える",
+                        "description": "Map japanese_kana to Escape",
                         "enabled": false,
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": ["command"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [{ "select_input_source": { "input_source_id": "com.google.inputmethod.Japanese.base" } }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": ["command"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [{ "select_input_source": { "input_source_id": "com.apple.keylayout.ABC" } }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "かなキー：単体押しでf19のみ、組み合わせで右Command",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "japanese_kana",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 250 },
-                                "to": [
-                                    {
-                                        "key_code": "right_command",
-                                        "lazy": true
-                                    }
-                                ],
-                                "to_if_alone": [{ "key_code": "f19" }],
+                                "to": [{ "key_code": "escape" }],
                                 "type": "basic"
                             }
                         ]
@@ -3923,7 +3889,6 @@
                         "product_id": 50475,
                         "vendor_id": 1133
                     },
-                    "ignore_vendor_events": true,
                     "manipulate_caps_lock_led": false
                 },
                 {
@@ -3940,8 +3905,7 @@
                         "product_id": 50504,
                         "vendor_id": 1133
                     },
-                    "ignore": false,
-                    "ignore_vendor_events": true
+                    "ignore": false
                 },
                 {
                     "identifiers": {
@@ -3949,8 +3913,7 @@
                         "product_id": 50475,
                         "vendor_id": 1133
                     },
-                    "ignore": false,
-                    "ignore_vendor_events": true
+                    "ignore": false
                 }
             ],
             "fn_function_keys": [
@@ -3963,16 +3926,16 @@
             "selected": true,
             "simple_modifications": [
                 {
+                    "from": { "key_code": "japanese_kana" },
+                    "to": [{ "key_code": "right_command" }]
+                },
+                {
                     "from": { "pointing_button": "button4" },
                     "to": [{ "key_code": "f13" }]
                 },
                 {
                     "from": { "pointing_button": "button5" },
                     "to": [{ "key_code": "f14" }]
-                },
-                {
-                    "from": { "key_code": "japanese_eisuu" },
-                    "to": [{ "key_code": "f19" }]
                 }
             ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "jis" }

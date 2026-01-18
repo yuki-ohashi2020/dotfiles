@@ -1,2 +1,12 @@
 .DS_Store
 .vim_mode
+
+
+# vim関係
+.vim/bundle/
+.vim/view/
+.vim/swap/
+.vim/undo/
+.vim/backup/
+
+.viminfo

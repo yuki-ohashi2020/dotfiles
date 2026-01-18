@@ -21,6 +21,8 @@ command! -nargs=1 Encode :e ++enc=<args>
 "====================
 filetype off
 filetype plugin indent off
+" .viminfo ファイルを作成しない設定
+set viminfo=
 
 " condition variables
 let g:is_windows = has('win32') || has('win64')
