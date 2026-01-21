@@ -57,7 +57,17 @@ require("lazy").setup({
 -- folke/flash.nvim, phaazon/hop.nvim
 -- lukas-reineke/indent-blankline.nvim
 -- mini.align
-vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
+vim.keymap.set('i', 'jj', '<Esc>')
+local km = vim.keymap
+-- ノーマルモードのキーバインド
+
+local NORMAL_MODE = "n"
+local INSERT_MODE = "i"
+-- 共通のキーバインド
+km.set(NORMAL_MODE, "x", '"_x') -- ヤンクせずに文字を削除する
+-- km.set(NORMAL_MODE, "<Esc><Esc>", "<cmd>nohlsearch<CR>") -- ハイライトを解除する
+-- インサートモードのキーバインド
+km.set(INSERT_MODE, "jj", "<Esc>") -- ノーマルモードに戻る
 
 -- Leaderキーをvs codeで使うかは検討が必要
 -- if not vim.g.vscode then
@@ -69,7 +79,13 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 
 
--- vim.opt を使うのが現代的な書き方です
+vim.opt.showmode = false            -- モード表示を非表示にする(モード表示はプラグインで行う)
+-- カーソル移動
+vim.opt.whichwrap:append("<,>,[,]") -- 左右の行移動を行頭/行末で可能にする
+vim.opt.scrolloff = 3               -- カーソル位置から上下の行数を確保
+vim.opt.sidescrolloff = 5           -- カーソル位置から左右の列数を確保
+vim.opt.cursorline = true           -- カーソル行をハイライト表示する
+
 local opt = vim.opt
 
 -- インデント関連
@@ -150,10 +166,6 @@ keymap('n', '<Tab>', '<C-w>w')
 keymap('n', '+', '<C-a>', { desc = "インクリメント" })
 keymap('n', '-', '<C-x>', { desc = "デクリメント" })
 
--- 複数ファイルの一括保存・終了
-keymap('n', '<C-q><C-q>', ':qa<CR>')
-keymap('n', '<C-w><C-w>', ':wa<CR>')
-keymap('n', '<C-w><C-q>', ':wqa<CR>')
 
 -- 挿入モードでの記号入力補助
 keymap('i', '<C-a>', '@')
@@ -161,11 +173,6 @@ keymap('i', '<C-d>', '$')
 keymap('i', '<C-p><C-l>', '+')
 keymap('i', '<C-m><C-i>', '-')
 keymap('i', '<C-e><C-q>', '=')
-
--- クリップボード（macOS用 pbcopy）
--- ※前回の設定で opt.clipboard = "unnamedplus" をしていれば、単に y だけで共有されますが、
---   あえてコマンドとして残す場合：
-keymap('n', 'copy', ':w !pbcopy<CR>', { silent = true })
 
 -- 高度なヤンク・ペースト挙動
 -- 貼り付け後に末尾へ移動
