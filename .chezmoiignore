@@ -1,11 +1,12 @@
-# From: ~/.local/share/chezmoi
-# To: $HOME
-# Toに含めないファイルやディレクトリを指定する
+# chezmoiで管理しないファイルを登録する
+# 明示的に登録することで管理漏れを発見できる
+#
+# 管理漏れを確認する: chezmoi unmanaged
+# 管理対象として追加する: chezmoi add <ファイル名>
 
+.config/chezmoi/
 README.md
 
-*.swp
-.DS_Store
 Brewfile
 
 .Justfile
@@ -13,3 +14,12 @@ Brewfile
 .envrc.local
 # direnvが一時的に作成するキャッシュディレクトリ
 .direnv/
+
+#############################################################
+# Macのシステムで自動で作成されるファイル
+#############################################################
+.CFUserTextEncoding
+*.swp
+.DS_Store
+.Trash
+.cache

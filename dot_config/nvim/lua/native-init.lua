@@ -36,6 +36,56 @@ require("lazy").setup({
       require("lualine").setup()
     end,
   },
+  -- Zen Mode
+  {
+    "folke/zen-mode.nvim",
+    lazy = false, -- 起動時に読み込む
+    opts = {
+      window = {
+        width = 80,
+        options = {
+          number = true, -- 行番号を表示したままにする
+          relativenumber = false,
+        },
+      },
+    },
+    config = function(_, opts)
+      local zen = require("zen-mode")
+      zen.setup(opts)
+      -- Neovimが完全に起動した後にZenModeを実行する
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function()
+          zen.open()
+        end,
+      })
+    end,
+    -- キーバインドの設定（例： スペースキー + z で起動）
+    keys = {
+      { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
+    },
+  },
+})
+
+-- vim.opt.termguicolors = true
+vim.api.nvim_set_hl(0, 'CursorIM', {
+  bg = '#3c3836',
+  fg = '#ebdbb2',
+  blend = 0 -- 透明度を0に
+})
+-- 日本語入力中のカーソルの色
+vim.api.nvim_set_hl(0, 'CursorIM', { bg = 'NONE', fg = 'NONE' })
+
+-- これらも試してみてください
+vim.api.nvim_set_hl(0, 'TermCursor', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TermCursorNC', { bg = 'NONE' })
+
+vim.opt.iminsert = 0
+vim.opt.imsearch = 0
+vim.api.nvim_create_autocmd('InsertEnter', {
+  pattern = '*',
+  callback = function()
+    vim.api.nvim_set_hl(0, 'CursorIM', { reverse = false, bg = 'NONE' })
+  end
 })
 -- 行番号の最小幅を1にする（これで左の余白が最小限になります）
 -- vim.opt.numberwidth = 1
