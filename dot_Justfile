@@ -36,8 +36,10 @@ setup:
 sync:
     @echo "dotfilesリポジトリに同期します..."
     @echo "From: $HOME => To: $SOURCE_DIR"
-    chezmoi add -r "$HOME/.editorconfig"
+    chezmoi add "$HOME/.editorconfig"
+    chezmoi add -r "$HOME/bin"
     chezmoi add -r "$HOME/.config/karabiner"
+    chezmoi add -r "$HOME/.config/ghostty"
     chezmoi add -r "$HOME/.config/nvim"
 
 deploy:

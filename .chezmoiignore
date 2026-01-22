@@ -1,4 +1,6 @@
-# ~/.local/share/chezmoi/.chezmoiignore
+# From: ~/.local/share/chezmoi
+# To: $HOME
+# Toに含めないファイルやディレクトリを指定する
 
 README.md
 
@@ -7,7 +9,6 @@ README.md
 Brewfile
 
 .Justfile
-bin/chezmoi
 
 .envrc.local
 # direnvが一時的に作成するキャッシュディレクトリ
