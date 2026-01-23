@@ -19,7 +19,8 @@
 #############################################################
 .ssh
 .gitconfig.local
-.local
+.local/share
+.local/state
 .envrc.local
 Working_Note
 Movies
