@@ -8,9 +8,14 @@ SHELL := /bin/zsh
 # Makefileと同じ階層
 SETUP_DIR := $(CURDIR)
 help:
-	cat "$(SETUP_DIR)/Makefile"
+	cat ./Makefile
 
+setup:
+	./brew_setup.sh
+	./os_default_setup.sh
+	./dns_setup.sh
+	./ssh_setup.sh
 
 dump:
 	@echo "管理パッケージをdumpします..."
-	brew bundle dump --force --describe --file "$(SETUP_DIR)/Brewfile"
+	brew bundle dump --force --describe --file ./Brewfile
