@@ -40,7 +40,6 @@ README.md
 # Library ←ignoreせずに選択的にchezmoi addして管理すること
 .vscode
 .warp
-Brewfile
 .Justfile
 
 #############################################################

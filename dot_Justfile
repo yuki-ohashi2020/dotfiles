@@ -13,6 +13,7 @@ apply:
 
 [private]
 chezmoi-add:
+    chezmoi add "{{TARGET_DIR}}/Brewfile"
     chezmoi add "{{TARGET_DIR}}/.zshenv"
     chezmoi add "{{TARGET_DIR}}/.editorconfig"
     chezmoi add -r "{{TARGET_DIR}}/.config"
@@ -69,15 +70,11 @@ nvim-upgrade:
     nvim --headless "+Lazy! sync" +qa
 
 upgrade:
-    @echo "------------------------------------------------"
-    @echo "Homebrew プラグインを更新します..."
-    @echo "------------------------------------------------"
+    @just header "Homebrew Plugins Upgrade"
     just brew-upgrade
-    @echo "------------------------------------------------"
-    @echo "Neovim プラグインを更新します..."
-    @echo "------------------------------------------------"
+    @just header "Neovim Plugins Upgrade"
     just nvim-upgrade
 
 dump:
     @echo "管理パッケージをdumpします..."
-    brew bundle dump --force --describe --file "$(SOURCE_DIR)/Brewfile"
+    brew bundle dump --force --describe --file "{{TARGET_DIR}}/Brewfile"
