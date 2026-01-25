@@ -46,15 +46,15 @@ TEXT_COLOR := "231"
 # 青
 BG_COLOR := "24"
 
-gum_box TEXT:
+[private]
+header TEXT:
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 save:
-    just gum_box "テスと"
+    @just header "Dotfiles Save"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
-    @echo "------------------------------------------------"
     just chezmoi-add
     @echo "------------------------------------------------"
     @echo "Git Auto Commit Push"
