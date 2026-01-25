@@ -43,7 +43,7 @@ setup:
 
 gum_box TEXT:
     @echo ""
-    @gum style --foreground 231 --background 24 --bold --padding "3 6" --width 60 --align center "{{TEXT}}"
+    @gum style --foreground 231 --background 24 --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
     @echo ""
 
 save:
