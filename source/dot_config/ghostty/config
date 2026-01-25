@@ -1,0 +1,43 @@
+# Ghostty config file
+# See:
+#   - ghostty +show-config --default --docs
+#   - https://ghostty.org/docs/config
+#
+# ⚠️コメントについての注意
+# コメントは行頭の # で始まりまる
+# configオプションの後ろにコメントを書くことはできない
+# 改行されるまでの1文をすべて値として認識してしまうため
+#
+# OK:
+#   # コメント
+#   confirm-close-surface = false
+#
+# NG:
+#   confirm-close-surface = false # コメント
+
+
+# ウィンドウを閉じる際に確認ダイアログを表示しない
+confirm-close-surface = false
+# タイトルバーを非表示にする
+macos-titlebar-style = hidden
+# フォントの指定（インストール済みのものを指定）
+font-family = "JetBrains Mono"
+font-size = 18
+
+# ウィンドウの余白（少し空けると見栄えが良くなります）
+window-padding-x = 10
+window-padding-y = 10
+
+# 背景の透過（0.0:透過 〜1.0: 不透過）
+background-opacity = 1.0
+#ぼかしの強さ（数値が大きいほど強くぼける）
+background-blur-radius = 0
+
+theme = "Catppuccin Latte"
+
+
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+# cursor-text = #504945
+# IMEの未確定文字の背景色を指定
+# cursor-ime-color = #1a1a1a

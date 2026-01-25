@@ -16,7 +16,7 @@ chezmoi-add:
     chezmoi add "{{TARGET_DIR}}/Brewfile"
     chezmoi add "{{TARGET_DIR}}/.zshenv"
     chezmoi add "{{TARGET_DIR}}/.editorconfig"
-    chezmoi add -r "{{TARGET_DIR}}/.config"
+    find "{{TARGET_DIR}}/.config" -mindepth 1 -maxdepth 1 ! -name 'chezmoi' -exec chezmoi add -r {} \;
     chezmoi add -r "{{TARGET_DIR}}/.local/bin"
     chezmoi add -r "{{TARGET_DIR}}/.local/libexec"
 

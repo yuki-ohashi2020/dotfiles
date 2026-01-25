@@ -1,0 +1,41 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+# 改行コードをlfに統一
+end_of_line = lf
+# 行末の不要なスペース（空白）を自動で削除する
+trim_trailing_whitespace = true
+# ファイルの末尾に空行コードをつける（POSIX標準）
+insert_final_newline = true
+
+[*.sh]
+indent_size = 2
+
+[*.rb]
+indent_size = 2
+
+[*.R]
+indent_size = 2
+
+[*.lua]
+indent_size = 2
+
+[*.{html,erb}]
+indent_size = 2
+
+[*.go]
+trim_trailing_whitespace = false
+indent_style = tab
+
+[*.md]
+# Markdownは行末にスペース2つで改行のため
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[Makefile]
+indent_style = tab
