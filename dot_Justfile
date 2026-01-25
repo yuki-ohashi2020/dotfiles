@@ -41,10 +41,15 @@ setup:
     echo "- run_xxx"
     just apply
 
+# 白
+TEXT_COLOR := "231"
+# 青
+BG_COLOR := "24"
+
 gum_box TEXT:
-    @echo ""
-    @gum style --foreground 231 --background 24 --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
-    @echo ""
+    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 60 --align left "{{TEXT}}"
+    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 save:
     just gum_box "テスと"
