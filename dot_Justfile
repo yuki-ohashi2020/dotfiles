@@ -41,8 +41,11 @@ setup:
     echo "- run_xxx"
     just apply
 
+gum_box TEXT:
+    gum style --foreground 212 --border normal --width 50 "{{TEXT}}"
+
 save:
-    @echo "------------------------------------------------"
+    just gum_box "テスと"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
     @echo "------------------------------------------------"
     just chezmoi-add
@@ -51,14 +54,24 @@ save:
     @echo "------------------------------------------------"
     just git-auto-commit-push
 
-upgrade:
-    @echo "brewと管理パッケージを更新します..."
+[private]
+brew-upgrade:
     brew update
     brew upgrade
 
+[private]
 nvim-upgrade:
-    @echo "Neovimのパッケージをインストール/アップデート/クリーンアップします..."
     nvim --headless "+Lazy! sync" +qa
+
+upgrade:
+    @echo "------------------------------------------------"
+    @echo "Homebrew プラグインを更新します..."
+    @echo "------------------------------------------------"
+    just brew-upgrade
+    @echo "------------------------------------------------"
+    @echo "Neovim プラグインを更新します..."
+    @echo "------------------------------------------------"
+    just nvim-upgrade
 
 dump:
     @echo "管理パッケージをdumpします..."
