@@ -1,3 +1,6 @@
+# ! ToDo ~/.local/binはパスが通っているため、シェルで叩けてしまう
+# ! 本来はJustfileやBTTといったプログラムから呼び出すことを想定している
+# ! そのため、 ~/.local/bin配下のスクリプトはパスが通っていない場所にいづれ移動させること
 set dotenv-load
 set fallback := true
 
@@ -47,7 +50,7 @@ sync:
 
 deploy:
     @echo "dotfilesリポジトリを更新します..."
-    @{{BIN_DIR}}/Justfile/deploy.sh
+    @{{BIN_DIR}}/git/deploy.sh
 
 upgrade:
     @echo "brewと管理パッケージを更新します..."
