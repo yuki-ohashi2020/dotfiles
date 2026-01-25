@@ -15,6 +15,18 @@ apply:
    chezmoi apply --verbose --interactive
    @# direnvが自動でリロードするので、sourceコマンドは不要
 
+[private]
+chezmoi-add:
+    chezmoi add "{{TARGET_DIR}}/.zshenv"
+    chezmoi add "{{TARGET_DIR}}/.editorconfig"
+    chezmoi add -r "{{TARGET_DIR}}/.config"
+    chezmoi add -r "{{TARGET_DIR}}/.local/bin"
+    chezmoi add -r "{{TARGET_DIR}}/.local/libexec"
+
+[private]
+git-auto-commit-push:
+    @{{LIB_DIR}}/git/auto-commit-push.sh
+
 # 変更の詳細を表示
 diff:
     @echo "dotfilesリポジトリとホームディレクトリの差分を表示します..."
@@ -33,24 +45,15 @@ setup:
     echo "- run_xxx"
     just apply
 
-sync:
-    @echo "dotfilesリポジトリに同期します..."
-    @echo "From: $HOME => To: {{SOURCE_DIR}}"
-    chezmoi add "$HOME/.zshenv"
-    chezmoi add "$HOME/.editorconfig"
-    chezmoi add -r "$HOME/.local/bin"
-    chezmoi add -r "$HOME/.local/libexec"
-    chezmoi add -r "$HOME/.config/zsh"
-    chezmoi add -r "$HOME/.config/git"
-    chezmoi add -r "$HOME/.config/ghostty"
-    chezmoi add -r "$HOME/.config/karabiner"
-    chezmoi add -r "$HOME/.config/linearmouse"
-    chezmoi add -r "$HOME/.config/nvim"
-    chezmoi add -r "$HOME/.config/raycast"
-
-deploy:
-    @echo "dotfilesリポジトリを更新します..."
-    @{{LIB_DIR}}/git/deploy.sh
+save:
+    @echo "------------------------------------------------"
+    @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
+    @echo "------------------------------------------------"
+    just chezmoi-add
+    @echo "------------------------------------------------"
+    @echo "Git Auto Commit Push"
+    @echo "------------------------------------------------"
+    just git-auto-commit-push
 
 upgrade:
     @echo "brewと管理パッケージを更新します..."

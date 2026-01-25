@@ -19,6 +19,7 @@
 #############################################################
 .ssh
 .gitconfig.local
+.config/chezmoi
 .local/share
 .local/state
 .envrc.local
