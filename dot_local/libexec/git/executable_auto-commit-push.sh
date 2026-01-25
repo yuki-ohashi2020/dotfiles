@@ -11,5 +11,5 @@ if [ -n "$(git status --porcelain)" ]; then
     git commit -m "auto commit: $NOW"
     git push origin main
 else
-    echo "✨ No changes to sync."
+    echo "✨ No changes."
 fi

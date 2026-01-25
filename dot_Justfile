@@ -1,7 +1,3 @@
-# ! ToDo ~/.local/binはパスが通っているため、シェルで叩けてしまう
-# ! 本来はJustfileやBTTといったプログラムから呼び出すことを想定している
-# ! そのため、 ~/.local/bin配下のスクリプトはパスが通っていない場所にいづれ移動させること
-
 # chezmoiにパスが通ってなければエラーで終了する
 export SOURCE_DIR := `chezmoi source-path`
 export TARGET_DIR := `chezmoi target-path`
