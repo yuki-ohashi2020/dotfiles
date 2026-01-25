@@ -1,4 +1,0 @@
-# zshのconfigディレクトリの指定
-export ZDOTDIR="$HOME/.config/zsh"
-# 可読性のため、ソースコードではZSH_CONFIG_DIRを使用する
-export ZSH_CONFIG_DIR="$ZDOTDIR"
