@@ -1,12 +1,11 @@
 # ! ToDo ~/.local/binはパスが通っているため、シェルで叩けてしまう
 # ! 本来はJustfileやBTTといったプログラムから呼び出すことを想定している
 # ! そのため、 ~/.local/bin配下のスクリプトはパスが通っていない場所にいづれ移動させること
-set dotenv-load
-set fallback := true
 
 # chezmoiにパスが通ってなければエラーで終了する
 export SOURCE_DIR := `chezmoi source-path`
-BIN_DIR := env_var("LOCAL_BIN_DIR")
+export TARGET_DIR := `chezmoi target-path`
+export LIB_DIR := "$TARGET_DIR/.local/libexec"
 
 default:
     @just --list
@@ -40,6 +39,7 @@ sync:
     chezmoi add "$HOME/.zshenv"
     chezmoi add "$HOME/.editorconfig"
     chezmoi add -r "$HOME/.local/bin"
+    chezmoi add -r "$HOME/.local/libexec"
     chezmoi add -r "$HOME/.config/zsh"
     chezmoi add -r "$HOME/.config/git"
     chezmoi add -r "$HOME/.config/ghostty"
@@ -50,7 +50,7 @@ sync:
 
 deploy:
     @echo "dotfilesリポジトリを更新します..."
-    @{{BIN_DIR}}/git/deploy.sh
+    @{{LIB_DIR}}/git/deploy.sh
 
 upgrade:
     @echo "brewと管理パッケージを更新します..."
