@@ -56,9 +56,7 @@ save:
     @just header "Dotfiles Save"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
     just chezmoi-add
-    @echo "------------------------------------------------"
-    @echo "Git Auto Commit Push"
-    @echo "------------------------------------------------"
+    @just header "Git Auto Commit Push"
     just git-auto-commit-push
 
 [private]
