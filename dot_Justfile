@@ -48,7 +48,7 @@ BG_COLOR := "24"
 
 gum_box TEXT:
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 60 --align left "{{TEXT}}"
+    @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 save:
