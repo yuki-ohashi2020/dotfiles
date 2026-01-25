@@ -42,7 +42,7 @@ setup:
     just apply
 
 gum_box TEXT:
-    gum style --foreground 212 --width 50 "{{TEXT}}"
+    gum style --foreground 231 --background 24 --bold --padding "1 2" --margin "1" --width 50 "{{TEXT}}"
 
 save:
     just gum_box "テスと"
