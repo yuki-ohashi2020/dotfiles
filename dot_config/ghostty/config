@@ -40,4 +40,4 @@ cursor-style-blink = false
 cursor-invert-fg-bg = true
 # cursor-text = #504945
 # IMEの未確定文字の背景色を指定
-cursor-ime-color = #1a1a1a
+# cursor-ime-color = #1a1a1a
