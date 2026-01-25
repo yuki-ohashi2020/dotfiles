@@ -8,7 +8,7 @@ xcode-select --install
 
 # todo
 # xcode-select --install
-# curl brew install chezmoi
+# brew install chezmoi
 # chezmoi -- init --apply yuki-ohashi2020/dotfiles
 ```
 

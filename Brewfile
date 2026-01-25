@@ -27,6 +27,8 @@ brew "mas"
 brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Python version management
+brew "pyenv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Static analysis and lint tool, for (ba)sh scripts

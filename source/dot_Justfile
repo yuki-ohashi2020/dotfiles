@@ -75,6 +75,3 @@ upgrade:
     @just header "Neovim Plugins Upgrade"
     just nvim-upgrade
 
-dump:
-    @echo "管理パッケージをdumpします..."
-    brew bundle dump --force --describe --file "{{TARGET_DIR}}/Brewfile"
