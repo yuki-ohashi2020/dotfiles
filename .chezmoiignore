@@ -60,5 +60,6 @@ Brewfile
 .CFUserTextEncoding
 *.swp
 .DS_Store
+**/.DS_Store
 .Trash
 .cache
