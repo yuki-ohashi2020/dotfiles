@@ -1,12 +1,36 @@
-# 環境の初期化のみを行う
+# ! 環境変数の設定のみを行うこと
+
+load_env() {
+  local env_file="$1"
+  if [ -f "$env_file" ]; then
+    # コメント以外の行を一括で環境変数化する
+    export $(grep -v '^#' "$env_file" | xargs)
+  fi
+}
+
+# .env
+local ENV_FILE_PATH="$HOME/.local/share/chezmoi/.env"
+load_env "$ENV_FILE_PATH"
+
+# 言語
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# エディッター
 export EDITOR=nvim
 export VISUAL=nvim
 
+# ~/.local/bin
 export LOCAL_BIN_DIR="$HOME/.local/bin"
 export PATH="$LOCAL_BIN_DIR:$PATH"
-# HomebrewのPathと環境変数の読み込み
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Homebrew
+# Pathと環境変数の読み込み
+eval "$($BREW_PATH shellenv)"
 export BREW_PLUGIN_DIR="${HOMEBREW_PREFIX}/share"
 
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+
+# Python
+export PYENV_ROOT="$HOME/$PYENV_DIR_NAME"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
