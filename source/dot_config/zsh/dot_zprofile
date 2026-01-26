@@ -26,6 +26,8 @@ export PATH="$LOCAL_BIN_DIR:$PATH"
 
 # キャッシュ
 export XDG_CACHE_HOME="$HOME/.local/cache"
+# lessコマンドのキャッシュファイル
+export LESSHISTFILE="$HOME/.cache/less/.lesshst"
 
 # Homebrew
 # Pathと環境変数の読み込み
