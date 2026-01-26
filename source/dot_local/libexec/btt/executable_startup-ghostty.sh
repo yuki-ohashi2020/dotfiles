@@ -2,7 +2,7 @@
 
 # パスの設定
 NVIM_PATH="/opt/homebrew/bin/nvim"
-TARGET_FILE="$HOME/Working_Note"
+TARGET_FILE="$HOME/Documents/Working_Note"
 
 # Ghosttyが起動していない場合のみ実行
 if ! pgrep -q "Ghostty"; then

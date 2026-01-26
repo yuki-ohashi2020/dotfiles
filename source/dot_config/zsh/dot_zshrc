@@ -179,9 +179,6 @@ if [ -x "$(command -v just)" ]; then
     source <(just --completions zsh)
 fi
 
-# direnvの設定
-eval "$(direnv hook zsh)"
-
 # .zshファイルをすべて読み込む
 for file in "$ZSH_CONFIG_DIR"/*.zsh; do
     [ -f "$file" ] && source "$file"
