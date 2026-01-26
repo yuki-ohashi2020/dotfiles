@@ -1,4 +1,4 @@
-# Justはログインシェルの環境変数を引き継いで起動される          お
+# Justはログインシェルの環境変数を引き継いで起動される
 # 常にホームディレクトリを基準にコマンドを実行する
 # set working-directory := "~"
 
@@ -10,6 +10,8 @@ export LIB_DIR := "$TARGET_DIR/.local/libexec"
 default:
     @just --list
 
+generate-env:
+    chezmoi apply "{{TARGET_DIR}}/.config/shell/global.env"
 
 # find "{{TARGET_DIR}}/.config" -mindepth 1 -maxdepth 1 ! -name 'chezmoi' -exec chezmoi add -r {} \;
 [private]
@@ -18,6 +20,7 @@ chezmoi-add:
     chezmoi add "{{TARGET_DIR}}/.editorconfig"
     chezmoi add -r "{{TARGET_DIR}}/.local/bin"
     chezmoi add -r "{{TARGET_DIR}}/.local/libexec"
+
 
 [private]
 git-auto-commit-push:
