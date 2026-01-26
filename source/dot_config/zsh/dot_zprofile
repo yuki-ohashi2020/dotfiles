@@ -24,6 +24,9 @@ export VISUAL=nvim
 export LOCAL_BIN_DIR="$HOME/.local/bin"
 export PATH="$LOCAL_BIN_DIR:$PATH"
 
+# キャッシュ
+export XDG_CACHE_HOME="$HOME/.local/cache"
+
 # Homebrew
 # Pathと環境変数の読み込み
 eval "$($BREW_PATH shellenv)"
