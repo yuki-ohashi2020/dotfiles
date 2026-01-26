@@ -1,3 +1,7 @@
+# Justはログインシェルの環境変数を引き継いで起動される          お
+# 常にホームディレクトリを基準にコマンドを実行する
+# set working-directory := "~"
+
 # chezmoiにパスが通ってなければエラーで終了する
 export SOURCE_DIR := `chezmoi source-path`
 export TARGET_DIR := `chezmoi target-path`
@@ -6,16 +10,12 @@ export LIB_DIR := "$TARGET_DIR/.local/libexec"
 default:
     @just --list
 
-[private]
-apply:
-   chezmoi apply --verbose --interactive
-   @# direnvが自動でリロードするので、sourceコマンドは不要
 
+# find "{{TARGET_DIR}}/.config" -mindepth 1 -maxdepth 1 ! -name 'chezmoi' -exec chezmoi add -r {} \;
 [private]
 chezmoi-add:
     chezmoi add "{{TARGET_DIR}}/.zshenv"
     chezmoi add "{{TARGET_DIR}}/.editorconfig"
-    find "{{TARGET_DIR}}/.config" -mindepth 1 -maxdepth 1 ! -name 'chezmoi' -exec chezmoi add -r {} \;
     chezmoi add -r "{{TARGET_DIR}}/.local/bin"
     chezmoi add -r "{{TARGET_DIR}}/.local/libexec"
 
@@ -28,18 +28,6 @@ diff:
     @echo "dotfilesリポジトリとホームディレクトリの差分を表示します..."
     chezmoi status
     chezmoi diff
-
-# 更新のDry-run
-dry-run:
-    chezmoi apply --dry-run --verbose
-
-setup:
-    echo "初期セットアップを実行します..."
-    echo "実行対象のファイル一覧:"
-    echo "- run_once_xxx"
-    echo "- run_onchange_xxx"
-    echo "- run_xxx"
-    just apply
 
 # 白
 TEXT_COLOR := "231"

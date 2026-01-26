@@ -26,8 +26,12 @@ export PATH="$LOCAL_BIN_DIR:$PATH"
 
 # キャッシュ
 export XDG_CACHE_HOME="$HOME/.local/cache"
+# npmキャッシュ
+export npm_config_cache="$HOME/.local/cache/npm"
 # lessコマンドのキャッシュファイル
 export LESSHISTFILE="$HOME/.cache/less/.lesshst"
+# セッション履歴(.zsh_sessions)を作らない
+export SHELL_SESSION_HISTORY=0
 
 # Homebrew
 # Pathと環境変数の読み込み
