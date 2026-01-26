@@ -1,5 +1,7 @@
 # どの設定ファイルを編集するかも書くこと
 
+export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
+alias cj="just -f $HOME/.local/share/chezmoi/Justfile"
 
 ######################################
 # complete
@@ -70,12 +72,14 @@ autoload -Uz add-zsh-hook
 autoload -Uz chpwd_recent_dirs cdr
 add-zsh-hook chpwd chpwd_recent_dirs
 # 履歴保存用のディレクトリ作成
-mkdir -p $HOME/.cache/shell/
+mkdir -p "$HOME/.local/share/zsh"
+
+# おすすめ：データの性質に合わせた場所
 
 zstyle ':completion:*' recent-dirs-insert both
 zstyle ':chpwd:*' recent-dirs-max 500
 zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/cache/shell/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/chpwd-recent-dirs"
 zstyle ':chpwd:*' recent-dirs-pushd true
 
 ######################################

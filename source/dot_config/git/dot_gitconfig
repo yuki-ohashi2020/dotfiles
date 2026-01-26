@@ -83,7 +83,7 @@
 [include]
     path = ~/.gitconfig.local
 [commit]
-    template = ~/.gitcommit.template
+    template = .gitcommit.template
 [merge]
     tool = vimdiff
 [filter "lfs"]

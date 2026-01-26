@@ -44,7 +44,6 @@ header TEXT:
     @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-#     just git-auto-commit-push
 save:
     @just header "Dotfiles Save"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
