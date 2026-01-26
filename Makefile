@@ -1,10 +1,11 @@
-include .env
+ENV_FILE=$(HOME)/.config/shell/global.env
+include $(ENV_FILE)
 
 export PATH := $(BREW_PATH):$(PATH)
 
 # pyenvの保存先(pyenv install)を指定
-export PYENV_ROOT := $(HOME)/$(PYENV_DIR_NAME)
-export PATH := $(PYENV_ROOT)/bin:$(PATH)
+# export PYENV_ROOT := $(HOME)/$(PYENV_DIR_NAME)
+export PATH := $(PYENV_PATH):$(PATH)
 
 SCRIPT_DIR := setup_scripts
 

@@ -6,7 +6,6 @@
 export SOURCE_DIR := `chezmoi source-path`
 export TARGET_DIR := `chezmoi target-path`
 export LIB_DIR := "$TARGET_DIR/.local/libexec"
-export DOTFILES_DIR := `git -C $(chezmoi source-path) rev-parse --show-toplevel`
 
 default:
     @just --list
