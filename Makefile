@@ -1,20 +1,22 @@
-SHELL := /bin/zsh
+include .env
 
-# -l (login): .zprofile を読み込んで環境変数やPATHを通す
-# -c (command): Makefile の各行をコマンドとして実行する
-# ※ .zshrc は非対話モードのため読み込まれない
-.SHELLFLAGS := -l -c
+export PATH := $(BREW_PATH):$(PATH)
 
-# Makefileと同じ階層
-SETUP_DIR := $(CURDIR)
+# pyenvの保存先(pyenv install)を指定
+export PYENV_ROOT := $(HOME)/$(PYENV_DIR_NAME)
+export PATH := $(PYENV_ROOT)/bin:$(PATH)
+
+SCRIPT_DIR := setup_scripts
+
 help:
 	cat ./Makefile
 
 setup:
-	./brew_setup.sh
-	./os_default_setup.sh
-	./dns_setup.sh
-	./ssh_setup.sh
+	$(SCRIPT_DIR)/brew_setup.sh
+	$(SCRIPT_DIR)/os_default_setup.sh
+	$(SCRIPT_DIR)/dns_setup.sh
+	$(SCRIPT_DIR)/python_setup.sh
+	$(SCRIPT_DIR)/ssh_setup.sh
 
 dump:
 	@echo "管理パッケージをdumpします..."

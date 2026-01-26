@@ -2,7 +2,7 @@
 
 # brew コマンドにパスが通っているか確認
 if ! command -v brew >/dev/null 2>&1; then
-  echo "Error: Homebrew is not installed or not in your PATH." >&2
+  echo "Error: Homebrew の PATH が通っていません" >&2
   exit 1
 fi
 
