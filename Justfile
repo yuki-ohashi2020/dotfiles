@@ -44,12 +44,13 @@ header TEXT:
     @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
+#     just git-auto-commit-push
 save:
     @just header "Dotfiles Save"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
     just chezmoi-add
     @just header "Git Auto Commit Push"
-    just git-auto-commit-push
+    pyenv exec python task_scripts/git/auto-commit-push.py --dir {{DOTFILES_DIR}}
 
 [private]
 brew-upgrade:
