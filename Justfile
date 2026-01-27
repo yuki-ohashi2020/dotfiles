@@ -25,11 +25,17 @@ generate-env:
     @echo "✅Generated"
     @cat "{{TARGET_DIR}}/.config/shell/global.env"
 
-# 変更の詳細を表示
-diff:
-    @echo "dotfilesリポジトリとホームディレクトリの差分を表示します..."
+status:
+    @just header "chezmoi 管理対象外(not add)"
+    chezmoi unmanaged
+    @just header "Source(左) と Target(右) の差分ステータス "
+    @echo "⚠️ status MMの場合: コンフリクトが起きている可能性あり"
     chezmoi status
-    chezmoi diff
+    @just header "GitリポジトリとSourceの差分ステータス"
+    git status
+
+ignore:
+    $EDITOR {{SOURCE_DIR}}/.chezmoiignore
 
 save:
     @just header "Dotfiles Save"
