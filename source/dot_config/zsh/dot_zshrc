@@ -13,6 +13,9 @@ alias cj="just -f $HOME/.local/share/chezmoi/Justfile"
 # - もしかして機能
 # - 存在しないコマンドは入力中に色で教えてくれること
 # brew install zsh-autosuggestions
+# 補完のキャッシュファイル
+export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
+mkdir -p "${ZSH_COMPDUMP:h}"
 
 # 補完を有効にする
 autoload -Uz compinit

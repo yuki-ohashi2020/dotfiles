@@ -22,8 +22,6 @@
 .config/chezmoi
 .local/share
 .local/state
-.envrc.local
-Working_Note
 Movies
 Music
 Pictures
