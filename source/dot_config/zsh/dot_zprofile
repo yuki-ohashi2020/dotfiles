@@ -1,4 +1,10 @@
-# ! 環境変数の設定のみを行うこと
+# * ログインシェル
+#   - ターミナルやSSHなどのログイン時に読み込まれる
+#   - zshrc を読み込む前に環境変数を設定する場所
+#
+# ! 対象範囲
+#   - 全てのログインシェル(対話型 / 非対話型)で必須な環境変数の設定
+#   - 対話型専用の設定（補完・エイリアス）は除外
 
 load_env() {
   local env_file="$1"
@@ -12,17 +18,21 @@ load_env() {
 local ENV_FILE="$HOME/.config/shell/global.env"
 load_env "$ENV_FILE"
 
+
 # 言語
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+
 # エディッター
-export EDITOR=code
+export EDITOR=nvim
 export VISUAL=nvim
+
 
 # ~/.local/bin
 export LOCAL_BIN_DIR="$HOME/.local/bin"
 export PATH="$LOCAL_BIN_DIR:$PATH"
+
 
 # キャッシュ
 export XDG_CACHE_HOME="$HOME/.local/cache"
@@ -33,6 +43,7 @@ export LESSHISTFILE="$HOME/.cache/less/.lesshst"
 # セッション履歴(.zsh_sessions)を作らない
 export SHELL_SESSION_HISTORY=0
 
+
 # Homebrew
 # Pathと環境変数の読み込み
 eval "$($BREW_PATH shellenv)"
@@ -40,6 +51,14 @@ export BREW_PLUGIN_DIR="${HOMEBREW_PREFIX}/share"
 
 
 # Python
-# export PYENV_ROOT="$HOME/$PYENV_DIR_NAME"
 export PATH="$PYENV_PATH/bin:$PATH"
 eval "$(pyenv init --path)"
+
+# ターミナル: Warp
+if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
+  export IS_WARP=true
+  # TODO: .warp.zrpfileに設定を移す
+  export EDITOR=nvim
+else
+  export IS_WARP=false
+fi
