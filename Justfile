@@ -1,6 +1,5 @@
 # Justはログインシェルの環境変数を引き継いで起動される
 # 常にホームディレクトリを基準にコマンドを実行する
-# set working-directory := "~"
 
 # chezmoiにパスが通ってなければエラーで終了する
 export SOURCE_DIR := `chezmoi source-path`
@@ -8,20 +7,15 @@ export TARGET_DIR := `chezmoi target-path`
 export LIB_DIR := "$TARGET_DIR/.local/libexec"
 export DOTFILES_DIR := `git -C $(chezmoi source-path) rev-parse --show-toplevel`
 
+PYTHON := `pyenv which python`
+
 default:
     @just --list
 
 generate-env:
-    chezmoi apply "{{TARGET_DIR}}/.config/shell/global.env"
-
-[private]
-chezmoi-add:
-    chezmoi re-add
-
-
-#[private]
-#git-auto-commit-push:
-#    @{{LIB_DIR}}/git/auto-commit-push.sh
+    @chezmoi apply "{{TARGET_DIR}}/.config/shell/global.env"
+    @echo "✅Generated"
+    @cat "{{TARGET_DIR}}/.config/shell/global.env"
 
 # 変更の詳細を表示
 diff:
@@ -29,23 +23,12 @@ diff:
     chezmoi status
     chezmoi diff
 
-# 白
-TEXT_COLOR := "231"
-# 青
-BG_COLOR := "24"
-
-[private]
-header TEXT:
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @gum style --foreground {{TEXT_COLOR}} --background {{BG_COLOR}} --bold --padding "2 4" --width 50 --align left "{{TEXT}}"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
 save:
-    @just header "Dotfiles Save"
+    @{{PYTHON}} task_scripts/header.py "Dotfiles Save"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
-    just chezmoi-add
-    @just header "Git Auto Commit Push"
-    pyenv exec python task_scripts/git/auto-commit-push.py --dir {{DOTFILES_DIR}}
+    @chezmoi re-add
+    @pyenv exec python task_scripts/header.py "Git Auto Commit Push"
+    @pyenv exec python task_scripts/git/auto-commit-push.py --dir {{DOTFILES_DIR}}
 
 [private]
 brew-upgrade:
@@ -57,8 +40,8 @@ nvim-upgrade:
     nvim --headless "+Lazy! sync" +qa
 
 upgrade:
-    @just header "Homebrew Plugins Upgrade"
-    just brew-upgrade
-    @just header "Neovim Plugins Upgrade"
-    just nvim-upgrade
+    @pyenv exec python task_scripts/header.py "Homebrew Plugins Upgrade"
+    @just brew-upgrade
+    @pyenv exec python task_scripts/header.py "Neovim Plugins Upgrade"
+    @just nvim-upgrade
 
