@@ -2,15 +2,23 @@
 # 常にホームディレクトリを基準にコマンドを実行する
 
 # chezmoiにパスが通ってなければエラーで終了する
-export SOURCE_DIR := `chezmoi source-path`
-export TARGET_DIR := `chezmoi target-path`
-export LIB_DIR := "$TARGET_DIR/.local/libexec"
-export DOTFILES_DIR := `git -C $(chezmoi source-path) rev-parse --show-toplevel`
+TARGET_DIR := `chezmoi target-path`
+SOURCE_DIR := `chezmoi source-path`
+DOTFILES_DIR := parent_directory(SOURCE_DIR)
+SCRIPTS_DIR  := DOTFILES_DIR + "/task_scripts"
 
 PYTHON := `pyenv which python`
 
 default:
     @just --list
+
+debug:
+    @echo "Dotfiles: {{DOTFILES_DIR}}"
+    @echo "Scripts:  {{SCRIPTS_DIR}}"
+
+[private]
+header TEXT:
+    @{{PYTHON}} {{SCRIPTS_DIR}}/header.py "{{TEXT}}"
 
 generate-env:
     @chezmoi apply "{{TARGET_DIR}}/.config/shell/global.env"
@@ -24,11 +32,11 @@ diff:
     chezmoi diff
 
 save:
-    @{{PYTHON}} task_scripts/header.py "Dotfiles Save"
+    @just header "Dotfiles Save"
     @echo "From: {{TARGET_DIR}} => To: {{SOURCE_DIR}}"
     @chezmoi re-add
-    @pyenv exec python task_scripts/header.py "Git Auto Commit Push"
-    @pyenv exec python task_scripts/git/auto-commit-push.py --dir {{DOTFILES_DIR}}
+    @just header "Git Auto Commit Push"
+    @{{PYTHON}} {{SCRIPTS_DIR}}/git/auto-commit-push.py --dir {{DOTFILES_DIR}}
 
 [private]
 brew-upgrade:
@@ -40,8 +48,8 @@ nvim-upgrade:
     nvim --headless "+Lazy! sync" +qa
 
 upgrade:
-    @pyenv exec python task_scripts/header.py "Homebrew Plugins Upgrade"
+    @just header "Homebrew Plugins Upgrade"
     @just brew-upgrade
-    @pyenv exec python task_scripts/header.py "Neovim Plugins Upgrade"
+    @just header "Neovim Plugins Upgrade"
     @just nvim-upgrade
 
