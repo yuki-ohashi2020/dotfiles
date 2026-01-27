@@ -14,18 +14,14 @@ default:
 generate-env:
     chezmoi apply "{{TARGET_DIR}}/.config/shell/global.env"
 
-# find "{{TARGET_DIR}}/.config" -mindepth 1 -maxdepth 1 ! -name 'chezmoi' -exec chezmoi add -r {} \;
 [private]
 chezmoi-add:
-    chezmoi add "{{TARGET_DIR}}/.zshenv"
-    chezmoi add "{{TARGET_DIR}}/.editorconfig"
-    chezmoi add -r "{{TARGET_DIR}}/.local/bin"
-    chezmoi add -r "{{TARGET_DIR}}/.local/libexec"
+    chezmoi re-add
 
 
-[private]
-git-auto-commit-push:
-    @{{LIB_DIR}}/git/auto-commit-push.sh
+#[private]
+#git-auto-commit-push:
+#    @{{LIB_DIR}}/git/auto-commit-push.sh
 
 # 変更の詳細を表示
 diff:

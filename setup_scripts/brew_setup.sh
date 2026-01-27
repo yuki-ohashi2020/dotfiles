@@ -8,3 +8,4 @@ fi
 
 # パッケージの追加のみでcleanup(同期的削除)はしない
 brew bundle --file="./Brewfile"
+
