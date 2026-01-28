@@ -10,7 +10,7 @@
 #	- Makefileはzshで実行する( zshenv を使いたいため)
 #	- シェルスクリプトで setup を行う( 初回実行時はPythonなど言語の設定がされていないため)
 
-# 非ログインシェルで実行( zshenv のみ読み込まれる)
+# zshの非ログインシェルで実行( zshenv のみ読み込まれる)
 SHELL := /bin/zsh
 # エラーが発生したら処理をストップさせる
 .SHELLFLAGS := -eu -o pipefail -c

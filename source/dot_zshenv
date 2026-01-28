@@ -59,7 +59,9 @@ LOCAL_SHARE_PATH="$HOME/.local/share"
 export XDG_DATA_HOME="$LOCAL_SHARE_PATH"
 # pyenvの保存先(pyenv install)を指定
 export PYENV_ROOT="$LOCAL_SHARE_PATH/pyenv"
+# Dotfiles
 export CHEZMOI_PATH="$LOCAL_SHARE_PATH/chezmoi"
+
 
 ########################################################################
 # ステート

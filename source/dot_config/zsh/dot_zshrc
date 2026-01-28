@@ -1,5 +1,5 @@
 
-alias cj="just -f $HOME/.local/share/chezmoi/Justfile"
+alias cj="just -f $CHEZMOI_PATH/Justfile"
 if [[ -n "$WARP_IS_TERMINAL" ]]; then
   source ~/.config/shell/warp.env
 #if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
@@ -38,7 +38,7 @@ zstyle ':completion:*' auto-menu yest
 # BTTで←ctrl+rで履歴からの絞り込み
 # 右のctrlでは発火させないこと
 mkdir -p "$HOME/.local/share/zsh"
-HISTFILE="$HOME/.local/share/zsh/.zsh_history"
+HISTFILE="$HOME/.local/share/zsh/zsh_history"
 
 # memory save num
 HISTSIZE=10000
@@ -109,7 +109,7 @@ chpwd() {
 # CDABLE_VARSを指定することで、~を省略できる
 # cd ~log => cd log
 setopt CDABLE_VARS
-hash -d dot=$HOME/dotfiles
+hash -d d=$CHEZMOI_PATH
 
 ######################################
 # other
@@ -178,7 +178,7 @@ function peco-select-history() {
 # ドットファイルのリポジトリへ一撃で移動
 function cd() {
   if [[ "$1" == "dot" ]]; then
-    builtin cd "$(chezmoi source-path)"
+    builtin cd "$CHEZMOI_PATH"
   else
     builtin cd "$@"
   fi

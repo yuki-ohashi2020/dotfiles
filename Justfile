@@ -1,5 +1,14 @@
-# Justはログインシェルの環境変数を引き継いで起動される
-# 常にホームディレクトリを基準にコマンドを実行する
+# * タスク実行スクリプト
+#   - 頻繁に実行されるタスクを登録する
+#
+# ! 対象範囲
+#   - Dotfilesの更新 / 状態の確認
+#   - Dotfilesの設定ファイルの編集
+#   - プラグインの更新
+#
+# ! 運用ルール
+#   - just は親プロセスの export 済み環境変数のみを引き継ぐ
+#   - そのため、zshenv 等で環変数を export した状態のシェルから実行すること
 
 TARGET_PATH := `chezmoi target-path`
 SOURCE_PATH := `chezmoi source-path`
@@ -63,4 +72,3 @@ upgrade:
     @just brew-upgrade
     @just header "Neovim Plugins Upgrade"
     @just nvim-upgrade
-
