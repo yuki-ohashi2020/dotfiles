@@ -1,5 +1,7 @@
 require("common-init")      -- 共通設定
 require("keymaps.semantic") -- キーマップの定義
+-- viminfoを無効化（空にする）
+vim.opt.viminfo = ""
 
 -- IM切り替えが安定するか検証: 01/27
 vim.api.nvim_create_autocmd("InsertLeave", {

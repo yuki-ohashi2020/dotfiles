@@ -19,7 +19,8 @@ mkdir -p "${ZSH_COMPDUMP:h}"
 
 # 補完を有効にする
 autoload -Uz compinit
-compinit
+compinit -d "$ZSH_COMPDUMP"
+
 # Tab で候補一覧を表示して選択
 zstyle ':completion:*' menu select
 
@@ -209,5 +210,3 @@ FAST_HIGHLIGHT_STYLES[double-hyphen-option]='fg=208'   # --オプション：オ
 # 描画負荷対策
 FAST_HIGHLIGHT_BUFFER_MAX_LINES=1000
 ################################################################################################################
-
-# tabで補完してくれるけど、かってに保管するっs
