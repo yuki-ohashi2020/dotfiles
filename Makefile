@@ -1,12 +1,20 @@
-ENV_FILE=$(HOME)/.config/shell/global.env
-include $(ENV_FILE)
+# * 環境構築スクリプト
+# 	- 動作環境に必要な設定を行う
+#
+# ! 対象範囲
+#	- ツール一式のインストール
+#	- OSやネットワークのデフォルト設定
+#	- ssh key の生成
+#
+# ! 運用ルール
+#	- Makefileはzshで実行する( zshenv を使いたいため)
+#	- シェルスクリプトで setup を行う( 初回実行時はPythonなど言語の設定がされていないため)
 
-export PATH := $(BREW_PATH):$(PATH)
-
-# pyenvの保存先(pyenv install)を指定
-# export PYENV_ROOT := $(HOME)/$(PYENV_DIR_NAME)
-export PATH := $(PYENV_PATH):$(PATH)
-
+# 非ログインシェルで実行( zshenv のみ読み込まれる)
+SHELL := /bin/zsh
+# エラーが発生したら処理をストップさせる
+.SHELLFLAGS := -eu -o pipefail -c
+# setup用のscript
 SCRIPT_DIR := setup_scripts
 
 help:

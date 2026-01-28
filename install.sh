@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# * 環境構築スクリプト
+#   - 環境構築時の1度のみ使用される
+#   - bash シェルで起動される
+#
+# ! 対象範囲
+#   - dotfilesリポジトリを扱うための最低限のツールのインストール
+#   - 具体的なsetupはdotfiles/Makefileで行う
+
 set -eu
 
 echo "🚀 Bootstrapping your Mac..."

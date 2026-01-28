@@ -15,49 +15,27 @@ load_env() {
 }
 
 # .env
-local ENV_FILE="$HOME/.config/shell/global.env"
-load_env "$ENV_FILE"
+local ENV_FILE="$HOME/.config/env/global.env"
+# load_env "$ENV_FILE"
 
 
-# 言語
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-
-# エディッター
-export EDITOR=nvim
-export VISUAL=nvim
-
-
-# ~/.local/bin
-export LOCAL_BIN_DIR="$HOME/.local/bin"
-export PATH="$LOCAL_BIN_DIR:$PATH"
-
-
-# キャッシュ
-export XDG_CACHE_HOME="$HOME/.local/cache"
-# npmキャッシュ
-export npm_config_cache="$HOME/.local/cache/npm"
-# lessコマンドのキャッシュファイル
-export LESSHISTFILE="$HOME/.cache/less/.lesshst"
-# セッション履歴(.zsh_sessions)を作らない
-export SHELL_SESSION_HISTORY=0
 
 
 # Homebrew
 # Pathと環境変数の読み込み
-eval "$($BREW_PATH shellenv)"
-export BREW_PLUGIN_DIR="${HOMEBREW_PREFIX}/share"
+# eval "$($BREW_PATH shellenv)"
+# export BREW_PLUGIN_DIR="${HOMEBREW_PREFIX}/share"
 
 
 # Python
-export PATH="$PYENV_PATH/bin:$PATH"
 eval "$(pyenv init --path)"
+
+pyenv global "$PYTHON_VERSION"
 
 # ターミナル: Warp
 if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
   export IS_WARP=true
-  # TODO: .warp.zrpfileに設定を移す
+  # TODO: .warp.zprofileに設定を移す
   export EDITOR=nvim
 else
   export IS_WARP=false
