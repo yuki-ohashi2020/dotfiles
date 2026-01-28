@@ -6,37 +6,3 @@
 #   - 全てのログインシェル(対話型 / 非対話型)で必須な環境変数の設定
 #   - 対話型専用の設定（補完・エイリアス）は除外
 
-load_env() {
-  local env_file="$1"
-  if [ -f "$env_file" ]; then
-    # コメント以外の行を一括で環境変数にセットする
-    export $(grep -v '^#' "$env_file" | xargs)
-  fi
-}
-
-# .env
-local ENV_FILE="$HOME/.config/env/global.env"
-# load_env "$ENV_FILE"
-
-
-
-
-# Homebrew
-# Pathと環境変数の読み込み
-# eval "$($BREW_PATH shellenv)"
-# export BREW_PLUGIN_DIR="${HOMEBREW_PREFIX}/share"
-
-
-# Python
-eval "$(pyenv init --path)"
-
-pyenv global "$PYTHON_VERSION"
-
-# ターミナル: Warp
-if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
-  export IS_WARP=true
-  # TODO: .warp.zprofileに設定を移す
-  export EDITOR=nvim
-else
-  export IS_WARP=false
-fi

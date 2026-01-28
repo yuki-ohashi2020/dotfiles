@@ -9,8 +9,8 @@
 #   - 対話型専用設定（プロンプト、補完、エイリアス等）は zshrc に記述
 #
 # ! 運用ルール
-# - ユーザ定義環境変数を先にセットする
-# - 必要に応じて zsh特殊環境変数を設定する
+#   - if 文などの条件分岐は記述しないこと
+#   - スクリプトの実行など処理プログラムは入れない
 
 ########################################################################
 # 言語
@@ -21,14 +21,16 @@ export LANG=en_US.UTF-8
 ########################################################################
 # エディッタ
 ########################################################################
-export EDITOR=nvim
+export EDITOR=code
 export VISUAL=nvim
 
 
 ########################################################################
 # キャッシュ
 ########################################################################
-LOCAL_CACHE_PATH="$HOME/.local/cache"
+# 【export必須】共通のキャッシュパス
+export LOCAL_CACHE_PATH="$HOME/.local/cache"
+# XDG基準
 export XDG_CACHE_HOME="$LOCAL_CACHE_PATH"
 # npmキャッシュ
 export npm_config_cache="$LOCAL_CACHE_PATH/npm"
@@ -42,31 +44,43 @@ export SHELL_SESSION_HISTORY=0
 # config
 ########################################################################
 CONFIG_PATH="$HOME/.config"
+# XDG基準
+export XDG_CONFIG_HOME="$CONFIG_PATH"
 # zshのconfigディレクトリの指定
 export ZDOTDIR="$CONFIG_PATH/zsh"
+# Git
+export GIT_CONFIG_GLOBAL="$CONFIG_PATH/git/.gitconfig"
 
 
 ########################################################################
-# Python
+# データ
 ########################################################################
 LOCAL_SHARE_PATH="$HOME/.local/share"
+export XDG_DATA_HOME="$LOCAL_SHARE_PATH"
 # pyenvの保存先(pyenv install)を指定
 export PYENV_ROOT="$HOME/.local/share/pyenv"
-export PYTHON_VERSION=3.12.2
+
+
+########################################################################
+# ステート
+########################################################################
+LOCAL_STATE_PATH="$HOME/.local/state"
+export XDG_STATE_HOME="$LOCAL_STATE_PATH"
+
 
 ########################################################################
 # Path
 ########################################################################
 LOCAL_BIN_PATH="$HOME/.local/bin"
 BREW_PATH=/opt/homebrew/bin
-
-# "$PYENV_ROOT/shims"
+PYTHON_PATH="$PYENV_ROOT/shims"
 
 # path 配列を Unique (重複禁止) に設定
 typeset -U path
-# 配列としてパスを追加（$path を最後に書くことで既存のパスを維持）
+# パスを追加（$path を最後に書くことで既存のパスを維持）
 path=(
     $LOCAL_BIN_PATH
     $BREW_PATH
+    $PYTHON_PATH
     $path
 )

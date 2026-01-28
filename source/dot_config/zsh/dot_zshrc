@@ -1,7 +1,9 @@
 
-export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 alias cj="just -f $HOME/.local/share/chezmoi/Justfile"
-
+if [[ -n "$WARP_IS_TERMINAL" ]]; then
+  source ~/.config/shell/warp.env
+#if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
+fi
 ######################################
 # complete
 ######################################
@@ -13,7 +15,7 @@ alias cj="just -f $HOME/.local/share/chezmoi/Justfile"
 # - 存在しないコマンドは入力中に色で教えてくれること
 # brew install zsh-autosuggestions
 # 補完のキャッシュファイル
-export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
+export ZSH_COMPDUMP="${LOCAL_CACHE_PATH}/zsh/zcompdump"
 mkdir -p "${ZSH_COMPDUMP:h}"
 
 # 補完を有効にする
@@ -187,9 +189,9 @@ if [ -x "$(command -v just)" ]; then
 fi
 
 # .zshファイルをすべて読み込む
-# for file in "$ZSH_CONFIG_DIR"/*.zsh; do
-#     [ -f "$file" ] && source "$file"
-# done
+for file in ~/.config/zsh/*.zsh; do
+     [ -f "$file" ] && source "$file"
+ done
 
 # ! プラグインマネージャを導入すること
 # fast-syntax-highlighting を読み込む
