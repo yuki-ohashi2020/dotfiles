@@ -58,8 +58,8 @@ export GIT_CONFIG_GLOBAL="$CONFIG_PATH/git/.gitconfig"
 LOCAL_SHARE_PATH="$HOME/.local/share"
 export XDG_DATA_HOME="$LOCAL_SHARE_PATH"
 # pyenvの保存先(pyenv install)を指定
-export PYENV_ROOT="$HOME/.local/share/pyenv"
-
+export PYENV_ROOT="$LOCAL_SHARE_PATH/pyenv"
+export CHEZMOI_PATH="$LOCAL_SHARE_PATH/chezmoi"
 
 ########################################################################
 # ステート

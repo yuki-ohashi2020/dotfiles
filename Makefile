@@ -15,17 +15,17 @@ SHELL := /bin/zsh
 # エラーが発生したら処理をストップさせる
 .SHELLFLAGS := -eu -o pipefail -c
 # setup用のscript
-SCRIPT_DIR := setup_scripts
+SCRIPT_PATH := setup_scripts
 
 help:
 	cat ./Makefile
 
 setup:
-	$(SCRIPT_DIR)/brew_setup.sh
-	$(SCRIPT_DIR)/os_default_setup.sh
-	$(SCRIPT_DIR)/dns_setup.sh
-	$(SCRIPT_DIR)/python_setup.sh
-	$(SCRIPT_DIR)/ssh_setup.sh
+	$(SCRIPT_PATH)/brew_setup.sh
+	$(SCRIPT_PATH)/os_default_setup.sh
+	$(SCRIPT_PATH)/dns_setup.sh
+	$(SCRIPT_PATH)/python_setup.sh
+	$(SCRIPT_PATH)/ssh_setup.sh
 
 dump:
 	@echo "管理パッケージをdumpします..."
