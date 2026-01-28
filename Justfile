@@ -21,9 +21,9 @@ header TEXT:
     @{{PYTHON}} {{SCRIPTS_DIR}}/header.py "{{TEXT}}"
 
 generate-env:
-    @chezmoi apply "{{TARGET_DIR}}/.config/shell/global.env"
+    @chezmoi apply "{{TARGET_DIR}}/.config/.env/global.env"
     @echo "✅Generated"
-    @cat "{{TARGET_DIR}}/.config/shell/global.env"
+    @cat "{{TARGET_DIR}}/.config/.env/global.env"
 
 status:
     @just header "chezmoi 管理対象外(not add)"
