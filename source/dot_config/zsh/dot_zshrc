@@ -1,115 +1,11 @@
 
+autoload -Uz add-zsh-hook
+
 alias cj="just -f $CHEZMOI_PATH/Justfile"
 if [[ -n "$WARP_IS_TERMINAL" ]]; then
   source ~/.config/shell/warp.env
 #if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
 fi
-######################################
-# complete
-######################################
-# ! ToDo
-# - タブで補完されること
-# - 部分的に一致している部分まで補完してくれること
-# - zsh-autosuggestions
-# - もしかして機能
-# - 存在しないコマンドは入力中に色で教えてくれること
-# brew install zsh-autosuggestions
-# 補完のキャッシュファイル
-export ZSH_COMPDUMP="${LOCAL_CACHE_PATH}/zsh/zcompdump"
-mkdir -p "${ZSH_COMPDUMP:h}"
-
-# 補完を有効にする
-autoload -Uz compinit
-compinit -d "$ZSH_COMPDUMP"
-
-# Tab で候補一覧を表示して選択
-zstyle ':completion:*' menu select
-
-# 部分一致を許可
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# Tab 押したときに最初の候補で自動確定しない
-zstyle ':completion:*' auto-menu yest
-
-######################################
-# history
-######################################
-# ! ToDo
-# BTTで←ctrl+rで履歴からの絞り込み
-# 右のctrlでは発火させないこと
-mkdir -p "$HOME/.local/share/zsh"
-HISTFILE="$HOME/.local/share/zsh/zsh_history"
-
-# memory save num
-HISTSIZE=10000
-# HISTFILE save num
-SAVEHIST=10000
-# command of history duplication ignore
-setopt hist_ignore_all_dups
-# command of <Space>command ignore
-setopt hist_ignore_space
-# start to end timestanp
-setopt extended_history
-# reduce blanks  ls   -l => ls -l
-setopt hist_reduce_blanks
-
-######################################
-# directory
-######################################
-# ! ToDo
-# - zoxide を cdで使えること
-# - ctrl+Dとかで移動したディレクトリの履歴を絞り込めること
-# - cd の後に移動したファイルの一覧を表示すること
-# - hashを使ってcd dotやcd conf などで移動できること
-
-# cd /home => /home cd ../ => ..
-setopt auto_cd
-# dirctory of stack push cd -<Tab>
-setopt auto_pushd
-# directory of stack duplication ignore
-setopt pushd_ignore_dups
-
-######################################
-# cdr 移動したディレクトリの履歴
-# cdr -l
-######################################
-autoload -Uz add-zsh-hook
-autoload -Uz chpwd_recent_dirs cdr
-add-zsh-hook chpwd chpwd_recent_dirs
-# 履歴保存用のディレクトリ作成
-mkdir -p "$HOME/.local/share/zsh"
-
-# おすすめ：データの性質に合わせた場所
-
-zstyle ':completion:*' recent-dirs-insert both
-zstyle ':chpwd:*' recent-dirs-max 500
-zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/chpwd-recent-dirs"
-zstyle ':chpwd:*' recent-dirs-pushd true
-
-######################################
-# cdd
-######################################
-
-if [[ -f $HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-m4i-SLASH-cdd.git/cdd ]]; then
-    source $HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-m4i-SLASH-cdd.git/cdd
-    touch $CDD_FILE
-    autoload -Uz add-zsh-hook
-    add-zsh-hook chpwd _cdd_chpwd
-fi
-
-chpwd() {
-    ls
-}
-
-######################################
-# hash
-# ディレクトリのエイリアスを登録できる
-######################################
-# CDABLE_VARSを指定することで、~を省略できる
-# cd ~log => cd log
-setopt CDABLE_VARS
-hash -d d=$CHEZMOI_PATH
 
 ######################################
 # other
@@ -175,39 +71,8 @@ function peco-select-history() {
 # ailias
 ######################################
 
-# ドットファイルのリポジトリへ一撃で移動
-function cd() {
-  if [[ "$1" == "dot" ]]; then
-    builtin cd "$CHEZMOI_PATH"
-  else
-    builtin cd "$@"
-  fi
-}
-
-if [ -x "$(command -v just)" ]; then
-    source <(just --completions zsh)
-fi
 
 # .zshファイルをすべて読み込む
 for file in ~/.config/zsh/*.zsh; do
      [ -f "$file" ] && source "$file"
  done
-
-# ! プラグインマネージャを導入すること
-# fast-syntax-highlighting を読み込む
-# ! fast-syntax-highlightingを使わないなら削除すること
-# source "${BREW_PLUGIN_DIR}/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-
-# 色設定
-typeset -A FAST_HIGHLIGHT_STYLES
-
-FAST_HIGHLIGHT_STYLES[unknown-token]='fg=196,bold'      # 存在しないコマンド：明るい赤+太字
-FAST_HIGHLIGHT_STYLES[command]='fg=040'                # 存在するコマンド：標準的な緑
-FAST_HIGHLIGHT_STYLES[alias]='fg=045'                  # エイリアス：明るい水色
-FAST_HIGHLIGHT_STYLES[path]='fg=220,underline'         # パス：黄色+下線
-FAST_HIGHLIGHT_STYLES[single-hyphen-option]='fg=208'   # -オプション：オレンジ
-FAST_HIGHLIGHT_STYLES[double-hyphen-option]='fg=208'   # --オプション：オレンジ
-
-# 描画負荷対策
-FAST_HIGHLIGHT_BUFFER_MAX_LINES=1000
-################################################################################################################
