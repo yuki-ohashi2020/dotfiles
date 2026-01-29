@@ -28,7 +28,6 @@ export VISUAL=nvim
 ########################################################################
 # キャッシュ
 ########################################################################
-# 【export必須】共通のキャッシュパス
 export LOCAL_CACHE_PATH="$HOME/.local/cache"
 # XDG基準
 export XDG_CACHE_HOME="$LOCAL_CACHE_PATH"
@@ -43,7 +42,7 @@ export SHELL_SESSION_HISTORY=0
 ########################################################################
 # config
 ########################################################################
-CONFIG_PATH="$HOME/.config"
+export CONFIG_PATH="$HOME/.config"
 # XDG基準
 export XDG_CONFIG_HOME="$CONFIG_PATH"
 # zshのconfigディレクトリの指定
@@ -55,7 +54,7 @@ export GIT_CONFIG_GLOBAL="$CONFIG_PATH/git/.gitconfig"
 ########################################################################
 # データ
 ########################################################################
-LOCAL_SHARE_PATH="$HOME/.local/share"
+export LOCAL_SHARE_PATH="$HOME/.local/share"
 export XDG_DATA_HOME="$LOCAL_SHARE_PATH"
 # pyenvの保存先(pyenv install)を指定
 export PYENV_ROOT="$LOCAL_SHARE_PATH/pyenv"

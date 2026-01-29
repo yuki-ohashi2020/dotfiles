@@ -1,6 +1,7 @@
 ---
-"editor_view:insert_autosuggestion": tab
-"input:open_completion_suggestions": ctrl-space
-"pane_group:navigate_next": alt-tab
-"workspace:activate_next_tab": ctrl-tab
+"editor_view:insert_autosuggestion": none
+"input:open_completion_suggestions": tab
 "workspace:toggle_ai_assistant": cmd-n
+"pane_group:navigate_next": alt-tab
+"editor_view:home": none
+"workspace:activate_next_tab": ctrl-tab
