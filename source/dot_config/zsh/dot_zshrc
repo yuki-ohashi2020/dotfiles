@@ -14,16 +14,9 @@ source "$DATA_PL_10K_DIR/powerlevel10k.zsh-theme"
 # powerlevel10k の設定
 source "$CONFIG_PATH/zsh/.p10k.zsh"
 
-
-
 autoload -Uz add-zsh-hook
 
 alias cj="just -f $CHEZMOI_PATH/Justfile"
-if [[ -n "$WARP_IS_TERMINAL" ]]; then
-#  source ~/.config/shell/warp.env
-#if [ -n "$WARP_IS_LOCAL_SHELL_SESSION" ]; then
-fi
-
 
 # .zshファイルをすべて読み込む
 for file in ~/.config/zsh/*.zsh; do
