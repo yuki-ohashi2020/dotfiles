@@ -56,6 +56,8 @@ export GIT_CONFIG_GLOBAL="$CONFIG_PATH/git/.gitconfig"
 ########################################################################
 export LOCAL_SHARE_PATH="$HOME/.local/share"
 export XDG_DATA_HOME="$LOCAL_SHARE_PATH"
+# zsh
+export DATA_ZSH_PATH="$LOCAL_SHARE_PATH/zsh"
 # pyenvの保存先(pyenv install)を指定
 export PYENV_ROOT="$LOCAL_SHARE_PATH/pyenv"
 # Dotfiles

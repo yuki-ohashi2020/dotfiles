@@ -1,48 +1,37 @@
-# cd /home => /home cd ../ => ..
-# setopt auto_cd
-# dirctory of stack push cd -<Tab>
+# ---------------------------------------------------------------------
+# ディレクトリ移動
+# ---------------------------------------------------------------------
+
+# ディレクトリの移動履歴を記録する
 setopt auto_pushd
-# directory of stack duplication ignore
+# 重複したディレクトリの移動履歴は保存しない
 setopt pushd_ignore_dups
 
-unsetopt auto_cd
 
+# ---------------------------------------------------------------------
+# * zoxide
+#   - @see https://github.com/ajeetdsouza/zoxide
+#
+# ! 運用ルール
+#   - builtin の cd を zoxide に置き換えて使用する
+# ---------------------------------------------------------------------
 
-######################################
-# hash
-# ディレクトリのエイリアスを登録できる
-######################################
-
-# 前のディレクトリに戻るのを楽にする
-alias b='cd -'
-
-############################################################################
-# zoxide
-############################################################################
-# zoxide を cd で起動する
-# 効かない_ZO_CMD_PREFIX
-export _ZO_CMD_PREFIX="cd"
-
-# zi の見た目の設定
+# よく移動するディレクトリ一覧の見た目の設定
 export _ZO_FZF_OPTS="
   --height=50%
   --reverse
   --border=sharp
   --delimiter '\s+'
   --preview='eza -T -L 2 --color=always --icons {2..}'
-  --preview-window=right:60%:wrap
+  --preview-window=right:40%:wrap
 "
+# よく移動するディレクトリ一覧
+alias cdi='zi'
 
 eval "$(zoxide init zsh)"
 
-# alias cd='__zoxide_z'
-alias cdl='zoxide query -l'
-alias cdi='zi'
-
-# CDABLE_VARSを指定することで、~を省略できる
-# cd ~log => cd log
-#setopt CDABLE_VARS
-# hash -d d=$CHEZMOI_PATH
+# cd dot        -> Dotfilesに移動する
+# cd dot以外    -> zoxideで移動する
 cd() {
   if [[ "$1" == "dot" ]]; then
     builtin cd "$CHEZMOI_PATH"
@@ -51,10 +40,3 @@ cd() {
 
   __zoxide_z "$@"
 }
-######################################
-# directory
-######################################
-# ! ToDo
-# - zoxide を cdで使えること
-# - ctrl+Dとかで移動したディレクトリの履歴を絞り込めること
-# - cd の後に移動したファイルの一覧を表示すること
