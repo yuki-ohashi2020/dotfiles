@@ -16,6 +16,7 @@ DOTFILES_PATH := env_var("CHEZMOI_PATH")
 SCRIPT_PATH  := DOTFILES_PATH + "/task_scripts"
 PYTHON := `pyenv which python`
 
+alias help := default
 # コマンド一覧
 default:
     @just --list
@@ -39,6 +40,11 @@ status:
     chezmoi status
     @just header "GitリポジトリとSourceの差分ステータス"
     git status
+
+alias ad := add
+# Chezmoi 管理に追加
+add FILE:
+    chezmoi add "$HOME"/{{FILE}}
 
 alias ig := ignore
 # Chezmoi の 除外ファイルを開く

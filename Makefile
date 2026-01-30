@@ -26,6 +26,13 @@ setup:
 	$(SCRIPT_PATH)/dns_setup.sh
 	$(SCRIPT_PATH)/python_setup.sh
 	$(SCRIPT_PATH)/ssh_setup.sh
+	make setup-zsh
+	@echo "✅: Setup 完了"
+	@echo "ログインシェルをzshに変更してください"
+	@echo "chsh -s /bin/zsh"
+
+setup-zsh:
+	$(SCRIPT_PATH)/zsh_setup.sh
 
 dump:
 	@echo "管理パッケージをdumpします..."

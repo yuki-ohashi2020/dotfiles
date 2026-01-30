@@ -1,25 +1,58 @@
 
-CACHE_PL_10K_FILE=$LOCAL_CACHE_PATH/p10k-instant-prompt-${(%):-%n}.zsh
-[[ -r $CACHE_PL_10K_FILE ]] && source $CACHE_PL_10K_FILE
+CONFIG_ZSHRC_PATH="$CONFIG_PATH"/zsh/zshrc
+# 必ずprompt優先
+source "$CONFIG_ZSHRC_PATH"/prompt.zsh
+source "$CONFIG_ZSHRC_PATH"/hook.zsh
+source "$CONFIG_ZSHRC_PATH"/ls.zsh
+source "$CONFIG_ZSHRC_PATH"/cd.zsh
+source "$CONFIG_ZSHRC_PATH"/history.zsh
 
-# powerlevel10k
-DATA_PL_10K_DIR="$LOCAL_SHARE_PATH/powerlevel10k"
-if [ ! -d "$DATA_PL_10K_DIR" ]; then
-    # 最新のコミット分だけcloneする
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$DATA_PL_10K_DIR"
-fi
 
-# powerlevel10k プラグイン
-source "$DATA_PL_10K_DIR/powerlevel10k.zsh-theme"
-# powerlevel10k の設定
-source "$CONFIG_PATH/zsh/.p10k.zsh"
+############################################################################
+# Git
+############################################################################
+alias g='git'
 
-autoload -Uz add-zsh-hook
+############################################################################
+# エディッター
+############################################################################
+alias vim="$EDITOR"
+alias vi="$EDITOR"
+# ! ToDo
+    # alias vim='nvim'
+    # alias vi='nvim'
 
+############################################################################
+# その他
+############################################################################
+alias cl='clear'
+alias tm='tmux'
+
+############################################################################
+# chezmoi
+############################################################################
+alias ch='chezmoi'
 alias cj="just -f $CHEZMOI_PATH/Justfile"
 
-# .zshファイルをすべて読み込む
-for file in ~/.config/zsh/*.zsh; do
-    [ -f "$file" ] && source "$file"
-done
+
+# ! ToDo オプションをつける
+# s Commandでもいいかも
+alias code-search='rg'
+# ctrl+r
+# コマンドで絞り込むか、コードで絞り込むか、ファイルで絞り込むか
+
+# rg --line-number --column --no-heading --color=always "pattern" | fzf --ansi
+# ! ToDo cmd+rでリロードにする
+# alias reload="source $HOME/.zprofile"
+# ! ToDo 起動時に読み込まれた設定を出力する方が良い
+# alias showZenv="cat $HOME/.zshenv"
+
+# ファイルを絞り込んでvimで開く
+# vim finderの略
+# alias vf="ag -l | peco | xargs -o vim"
+
+# ! ToDo fdコマンド
+# bat
+# zsh-syntax-highlighting
+# fzf
 

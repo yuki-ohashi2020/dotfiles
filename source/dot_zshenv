@@ -60,6 +60,8 @@ export XDG_DATA_HOME="$LOCAL_SHARE_PATH"
 export PYENV_ROOT="$LOCAL_SHARE_PATH/pyenv"
 # Dotfiles
 export CHEZMOI_PATH="$LOCAL_SHARE_PATH/chezmoi"
+# Powerlevel 10k
+export DATA_P10K_PATH="$LOCAL_SHARE_PATH/powerlevel10k"
 
 
 ########################################################################
