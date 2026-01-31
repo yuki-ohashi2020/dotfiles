@@ -7,6 +7,11 @@ setopt auto_pushd
 # 重複したディレクトリの移動履歴は保存しない
 setopt pushd_ignore_dups
 
+# ディレクトリ移動時にフォルダの中身を表示する
+cd_hook() {
+    eza -a --group-directories-first --icons
+}
+add-zsh-hook chpwd cd_hook
 
 # ---------------------------------------------------------------------
 # * zoxide

@@ -1,74 +1,55 @@
-######################################
-# complete
-######################################
-# 補完を有効にする
+# ---------------------------------------------------------------------
+# コマンド補完
+# ---------------------------------------------------------------------
 
-autoload -Uz compinit
-# ! ToDo
-# - タブで補完されること
-# - 部分的に一致している部分まで補完してくれること
-# - zsh-autosuggestions
-# brew install zsh-autosuggestions
-# 補完のキャッシュファイル
-ZSH_COMP_DUMP="${LOCAL_CACHE_PATH}/zsh/zcompdump"
-mkdir -p "${ZSH_COMP_DUMP:h}"
+setopt auto_list        # 補完候補が複数ある時に自動でリストを表示
+setopt auto_menu        # 2回目のTabでメニュー選択モードに入る
+setopt correct_all      # コマンド名 + 引数をスペルチェックの対象にする
 
-# ! 一旦、-Cでキャッシュを毎回生成させている
-compinit -C -d "$ZSH_COMP_DUMP"
-setopt auto_list       # 補完候補が複数ある時に自動でリストを表示
-setopt auto_menu       # 2回目のTabでメニュー選択モードに入る
-setopt correct
+# --- UI (見た目・メニュー・色) ---
+zstyle ':completion:*' menu select                             # 矢印キーで選択可能にする
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"        # ファイル種別ごとに色付け
+zstyle ':completion:*' verbose yes                             # オプションの説明を表示
+zstyle ':completion:*' group-name ''                           # グループ化を有効化
+zstyle ':completion:*:descriptions' format '%F{blue}--- %d ---%f' # グループ見出しの装飾
+zstyle ':completion:*:messages' format '%F{yellow}%d%f'        # システムメッセージの装飾
 
-# 補完候補に常にドットファイル（.から始まるファイル）を表示する
-# これを書くと "vim ." の後にTabを叩いた時、隠しファイルが出てきます
-setopt glob_dots
+# --- 検索ルール (マッチング・許容範囲) ---
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' # 大文字小文字無視・区切り文字補完
+zstyle ':completion:*:approximate:*' max-errors 2              # 2文字までのタイポを許容
+_comp_options+=(globdots)                                      # ドットファイルを補完対象に入れる
 
-# Tab で候補一覧を表示して選択
-zstyle ':completion:*' menu select
-# 部分一致を許可
-zstyle ':completion:*' matcher-list \
-  'm:{a-z}={A-Z}' \
-  'r:|[._-]=* r:|=*'
+# --- フィルタとソート ---
+zstyle ':completion:*' list-dirs-first true                    # ディレクトリを先に表示
+zstyle ':completion:*' file-sort modification                  # 新しいファイルを先に表示
+zstyle ':completion:*' special-dirs false                      # . と .. は候補に出さない
 
-zstyle ':completion:*' list-dirs-first true
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' file-sort modification
-zstyle ':completion:*' special-dirs false
 
-zstyle ':completion:*:messages' format '%F{yellow}%d%f'
-zstyle ':completion:*:descriptions' format '%F{blue}--- %d ---%f'
+# ---------------------------------------------------------------------
+# * zsh-autosuggestions
+#   - @see https://github.com/zsh-users/zsh-autosuggestions
+#
+# ! 運用ルール
+# ---------------------------------------------------------------------
+source "$DATA_BREW_PATH/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# 補完ミスを修正する (多少のタイポなら補完してくれる)
-zstyle ':completion:*' completer _complete _approximate
-
-# --- 中略 (compinit などの設定) ---
-
-source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-# bindkey '^I' autosuggest-accept # ctrl提案を受け入れる
+# 補完の提案色(グレー)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+# 提案に必須な最低文字数
+ZSH_AUTOSUGGEST_MIN_PREFIX_LENGTH=2
+# 提案の検索ルール(履歴 -> 補完候補)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# 提案を受け入れる(行末:end まで補完という意味)
+bindkey '^e' autosuggest-accept
 
 ###############################################################################
-source "$(brew --prefix)/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+# source "$(brew --prefix)/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+# source <(fzf-tab --zsh)
+
 # 3. fzf-tab の見た目カスタマイズ (お好みで)
 # 補完候補のプレビューを表示する設定（例：ディレクトリの中身を見せる）
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-command fzf
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=always $realpath'
+# zstyle ':fzf-tab:*' fzf-command fzf
 
-# 補完系では最後に読み込まないとだめ
-source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
-return
-
-
-# zsh-completions (外部リポジトリ): compinit 標準ではカバーしていない多くのコマンド（docker, gitの細かいサブコマンド等）の補完定義を追加します。
-#zsh-autosuggestions: 入力中に「履歴から薄く補完候補を出す」機能。これは compinit とは別の仕組みですが、爆速で入力できます。
-# fzf-tab: これが今一番のトレンドです。 compinit の補完候補を fzf で選択できるようにするプラグインで、ボスがToDoに書いていた「候補を絞り込めること」を最高レベルで実現します。
-
-
-
-if [ -x "$(command -v just)" ]; then
-    source <(just --completions zsh)
-fi
+#source <(just --completions zsh)

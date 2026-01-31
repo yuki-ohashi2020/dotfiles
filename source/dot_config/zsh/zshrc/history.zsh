@@ -10,15 +10,19 @@ HISTSIZE=100000
 # ファイルに置く履歴件数
 SAVEHIST=100000
 
-# 複数のターミナル間で履歴をリアルタイム共有する
-setopt share_history
+# 履歴検索に Atuin を使用するときのオプション
+#   - Atuin と設定が競合するためオプションを切る
+#   - zsh の標準ヒストリーを使用する場合はsetoptにすること
+atuin_options() {
+    # 複数のターミナル間で履歴をリアルタイム共有する
+    unsetopt share_history
+    # コマンドを入力後にすぐに履歴に書き込む
+    unsetopt inc_append_history
+    # コマンドの実行日時を記録する
+    unsetopt extended_history
+}
 
-# コマンドを入力後にすぐに履歴に書き込む
-setopt inc_append_history
-# 実行日付のフォーマット
-HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
-# コマンドの実行日時を記録する
-setopt extended_history
+atuin_options()
 
 # 履歴に重複を含めない
 setopt hist_ignore_all_dups
@@ -33,24 +37,21 @@ setopt hist_reduce_blanks
 #   - 履歴に残したくないAPIキーなどを入力する時に使う
 setopt hist_ignore_space
 
-
 # ---------------------------------------------------------------------
-# * fzf
-#   - @see https://github.com/junegunn/fzf
+# * Atuin
+#   - @see https://github.com/atuinsh/atuin
+#
+# ! 運用ルール
+#   - 必ずプラグインの最後にsourceすること
+#   - Atuin の ZLE ウィジェットの設定が上書きされる可能性があるため
+#   - zsh 標準の履歴検索と置き換えて使用する
 # ---------------------------------------------------------------------
-
-# 行番号を表示しない
-export FZF_CTRL_R_OPTS="--with-nth=2.."
-
-# 履歴検索の画面の見た目の設定
-export FZF_DEFAULT_OPTS='
-  --height 40%
-  --layout=reverse
-  --border
-  --inline-info
-  --preview "echo {2..}" --preview-window down:3:wrap
-'
-
-source <(fzf --zsh)
+eval "$(atuin init zsh)"
 # 履歴検索
-bindkey '^r' fzf-history-widget
+bindkey '^R' atuin-search
+
+alias hs='atuin search -i'
+alias history='atuin search -i'
+
+# history stats
+alias hst='atuin stats'

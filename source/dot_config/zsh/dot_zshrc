@@ -16,18 +16,32 @@
 #   - 📢 setup 完了前の zsh の起動によるエラーは許容するものとする
 # ---------------------------------------------------------------------
 
+# ---------------------------------------------------------------------
+# local 変数
+# ---------------------------------------------------------------------
+DATA_BREW_PATH="$(brew --prefix)"/share             # プラグインの実体
+ZSH_COMP_DUMP="${LOCAL_CACHE_PATH}/zsh/zcompdump"   #補完のキャッシュファイル
+
+# ---------------------------------------------------------------------
+# autoload
+# ---------------------------------------------------------------------
+autoload -Uz compinit           # 補完 有効化
+mkdir -p "${ZSH_COMP_DUMP:h}"
+compinit -d "$ZSH_COMP_DUMP"
+
+autoload -Uz add-zsh-hook       # hook 有効化
 
 # ---------------------------------------------------------------------
 # 設定ファイル( *.zsh ) の読み込み
 # ---------------------------------------------------------------------
 zshrc_files=(
-  prompt.zsh        # 必ず prompt.zsh から読み込むこと
-  hook.zsh
+  theme.zsh         # 必ず最初に読み込むこと
   ls.zsh
   cd.zsh
-  history.zsh
-  completion.zsh
   cli-editing.zsh
+  completion.zsh
+  highlight.zsh     # 必ず completion.zsh の後に読み込むこと
+  history.zsh       # 必ず最後に読み込むこと
 )
 
 CONFIG_ZSHRC_PATH="$CONFIG_PATH"/zsh/zshrc
@@ -36,20 +50,15 @@ for file in "${zshrc_files[@]}"; do
   [[ -r "$fullpath" ]] && source "$fullpath"
 done
 
-
-# ---------------------------------------------------------------------
-# オプション
-# ---------------------------------------------------------------------
-# ビープ音をオフ
-setopt no_beep
-
 # ---------------------------------------------------------------------
 # エイリアス
 # ---------------------------------------------------------------------
 alias g='git'
+compdef _git g
+
 alias cl='clear'
 alias tm='tmux'
-alias cat='bat'
+alias cat='bat --paging=never'
 
 # エディッタ
 alias vim="$EDITOR"
@@ -60,22 +69,62 @@ alias ch='chezmoi'
 alias cj="just -f $CHEZMOI_PATH/Justfile"
 
 
-# s Commandでもいいかも
-alias code-search='rg'
-# ctrl+r
-# コマンドで絞り込むか、コードで絞り込むか、ファイルで絞り込むか
-
 # rg --line-number --column --no-heading --color=always "pattern" | fzf --ansi
 # ! ToDo cmd+rでリロードにする
 # alias reload="source $HOME/.zprofile"
-# ! ToDo 起動時に読み込まれた設定を出力する方が良い
-# alias showZenv="cat $HOME/.zshenv"
 
 # ファイルを絞り込んでvimで開く
 # vim finderの略
-# alias vf="ag -l | peco | xargs -o vim"
 
 # ! ToDo fdコマンド
-# bat
-# fzf
 
+# ! 実装途中
+# ファイル検索 → エディタ起動
+# fzf | xargs $EDITOR
+# fzf --preview 'bat --style=numbers --color=always {} --preview-window=right:60%' | xargs $EDITOR
+
+# ! 実装途中
+# git
+# git status --short | fzf | awk '{print $2}'
+
+# rg --line-number . |
+# fzf |
+# awk -F: '{print $1 "+" $2}' |
+# xargs nvim
+
+alias fenv='typeset -x | fzf --reverse --border --header "[ 環境変数 ]"'
+
+# TODO: 仕様が固まったらcd.envに移したい
+fcd() {
+    local fdir=(
+        "$HOME/.config"
+        "$HOME/.local"
+    )
+
+    local exclude_dirs=(
+        "node_modules"
+        ".git"
+        "cache"
+        "nvim/lazy"
+        "vscode/extensions"
+    )
+
+    local ex_args=()
+    for ex in "${exclude_dirs[@]}"; do
+        ex_args+=(--exclude "$ex")
+    done
+
+    local selected
+    # ポイント1: fdからはフルパスを出す
+    # ポイント2: sedで表示用の列を作る（フルパス + タブ + チルダパス）
+    # ポイント3: fzfの --with-nth で2列目（チルダ）だけを表示し、1列目（フルパス）を返す
+    selected=$(fd -t d . "${fdir[@]}" "${ex_args[@]}" | sort | \
+        awk -v home="$HOME" '{print $0 "\t" $0}' | \
+        sed "s|\t$HOME|\t~|" | \
+        fzf --delimiter=$'\t' --with-nth=2 | cut -d$'\t' -f1)
+
+    if [ -n "$selected" ]; then
+        # すでにフルパスなので、そのまま移動できる
+        builtin cd "$selected"
+    fi
+}
