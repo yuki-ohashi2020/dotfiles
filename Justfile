@@ -46,6 +46,10 @@ alias ad := add
 add FILE:
     chezmoi add "$HOME"/{{FILE}}
 
+# 一括forget
+all-forget:
+    @{{PYTHON}} {{SCRIPT_PATH}}/chezmoi-all-forget.py
+
 alias ig := ignore
 # Chezmoi の 除外ファイルを開く
 ignore:
