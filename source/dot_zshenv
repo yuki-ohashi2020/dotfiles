@@ -9,7 +9,7 @@
 #   - 対話型専用設定（プロンプト、補完、エイリアス等）は zshrc に記述
 #
 # ! 運用ルール
-#   - if 文などの条件分岐は記述しないこと
+#   - if 文などの条件分岐は極力、記述しないこと
 #   - スクリプトの実行など処理プログラムは入れない
 
 ########################################################################
@@ -46,7 +46,8 @@ export CONFIG_PATH="$HOME/.config"
 # XDG基準
 export XDG_CONFIG_HOME="$CONFIG_PATH"
 # zshのconfigディレクトリの指定
-export ZDOTDIR="$CONFIG_PATH/zsh"
+export CONFIG_ZSH_PATH="$CONFIG_PATH/zsh"
+export ZDOTDIR="$CONFIG_ZSH_PATH"
 # Git
 export GIT_CONFIG_GLOBAL="$CONFIG_PATH/git/.gitconfig"
 
@@ -89,3 +90,12 @@ path=(
     $PYTHON_PATH
     $path
 )
+
+if [[ "$IS_BTT" ]]; then
+    LOCAL_LIB_BTT_PATH="$HOME/.local/lib/btt"
+
+    path=(
+        $LOCAL_LIB_BTT_PATH
+        $path
+    )
+fi
