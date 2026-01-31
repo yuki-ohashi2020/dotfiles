@@ -35,7 +35,7 @@ alias st := status
 status:
     @just header "chezmoi 管理対象外(not add)"
     chezmoi unmanaged
-    @just header "Source(左) と Target(右) の差分ステータス "
+    @just header "Target(左) と Source(右) の差分ステータス "
     @echo "⚠️ status MMの場合: コンフリクトが起きている可能性あり"
     chezmoi status
     @just header "GitリポジトリとSourceの差分ステータス"
@@ -48,7 +48,7 @@ add FILE:
 
 # 一括forget
 all-forget:
-    @{{PYTHON}} {{SCRIPT_PATH}}/chezmoi-all-forget.py
+    @{{PYTHON}} {{SCRIPT_PATH}}/chezmoi-all-forget.py --target-dir {{TARGET_PATH}}
 
 alias ig := ignore
 # Chezmoi の 除外ファイルを開く
