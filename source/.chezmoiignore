@@ -44,6 +44,10 @@ Downloads
 .config/chezmoi
 .config/karabiner/automatic_backups
 .config/vscode/extensions
+# vs codeのMarkdownプレビュープラグインの設定ファイル
+.config/crossnote
+.config/raycast/ai
+.config/raycast/extensions
 
 #############################################################
 # ~/.local
