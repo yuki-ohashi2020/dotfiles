@@ -21,15 +21,24 @@ help:
 	cat ./Makefile
 
 setup:
+	echo "🔑 管理者権限を確認します..."
+	sudo -v
+	make setup_network
+	make setup-energy
 	$(SCRIPT_PATH)/brew_setup.sh
 	$(SCRIPT_PATH)/os_default_setup.sh
-	$(SCRIPT_PATH)/dns_setup.sh
 	$(SCRIPT_PATH)/python_setup.sh
 	$(SCRIPT_PATH)/ssh_setup.sh
 	make setup-zsh
 	@echo "✅: Setup 完了"
 	@echo "ログインシェルをzshに変更してください"
 	@echo "chsh -s /bin/zsh"
+
+setup-network:
+	$(SCRIPT_PATH)/setup_network.sh
+
+setup-energy:
+	$(SCRIPT_PATH)/setup_energy.sh
 
 setup-zsh:
 	$(SCRIPT_PATH)/zsh_setup.sh

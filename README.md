@@ -1,17 +1,40 @@
-# README
+# Docs
 
-## Mac買い替え時の設定
+## 01\_はじめに
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/yuki-ohashi2020/dotfiles/main/install.sh)"
-chsh -s /bin/zsh
-```
+---
 
-.から始まるファイルはホームディレクトリに追加されない
-設定ファイルは.config  
-データソースは.local
+- [📋 01\_概要](Docs/01_はじめに/01_概要.md)
+- [💻 02\_ハードウェア要件](Docs/01_はじめに/02_ハードウェア要件.md)
+- [🚀 03\_セットアップ手順](Docs/01_はじめに/03_セットアップ手順.md)
 
-chzmoi apply(init)で実行されるrun_xx系は使わない
-makeで叩いてsetupさせる
+## 02\_アーキテクチャ
 
-マシン1台しかないのでchzmoi applyは使わない
+---
+
+- [📱 03\_アプリの管理](Docs/03_アプリの管理.md)
+- アーキテクチャ
+  - フォルダ構成.md
+  - アプリ管理(Homebrew).md
+  - バージョン管理(Git).md
+  - dotfiles管理(chezmoi).md
+
+- 基本操作
+  - キーバインド一覧.md (キーマップ+ショートカット統合)
+  - ウィンドウ管理.md
+
+- 開発環境
+  - シェル環境.md
+  - ターミナル(Alacritty等).md
+  - エディター(Neovim等).md
+
+- ワークフロー
+  - リサーチ.md
+  - メモ・ナレッジ管理.md (統合を検討)
+  - タスク管理.md
+  - バックアップ戦略.md
+
+- 付録
+  - トラブルシューティング.md
+  - カスタマイズガイド.md
+  - 参考資料.md

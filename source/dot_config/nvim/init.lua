@@ -3,15 +3,12 @@ require("keymaps.semantic") -- キーマップの定義
 -- viminfoを無効化（空にする）
 vim.opt.viminfo = ""
 
--- IM切り替えが安定するか検証: 01/27
-vim.api.nvim_create_autocmd("InsertLeave", {
+-- IM切り替えが安定するか検証: 02/01
+-- ノーマルモードに戻る時に英数(ABC)に切り替え
+vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineLeave" }, {
   pattern = "*",
   callback = function()
-    -- macOSの場合 (macism をインストール済みであることが前提)
-    vim.fn.system("macism com.apple.keylayout.ABC")
-
-    -- Windowsの場合 (im-select.exe をインストール済みであることが前提)
-    -- vim.fn.system("im-select.exe 1033")
+    vim.fn.system("/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
   end,
 })
 
